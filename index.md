@@ -2,7 +2,7 @@
 
 Hi, I am Hannah Rigdon and I'm really excited to be taking Open Source GIS this semester.
 
-- item number one
+- [Gravity Model for Spatial Interaction](gravity/gravity.md)
 - item number two
 
 1. first thing
