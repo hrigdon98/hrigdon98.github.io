@@ -3,8 +3,6 @@ title: Main page
 layout: default
 ---
 
-
-
 # Hannah Rigdon's Open Source GIS Portfolio
 
 Hi, I am Hannah Rigdon and I'm really excited to be taking Open Source GIS this semester.
