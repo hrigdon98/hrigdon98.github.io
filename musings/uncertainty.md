@@ -1,3 +1,7 @@
+---
+title: Main page
+layout: default
+---
 # Uncertainty and Error in Geography
 
 Expressions of error and uncertainty are particularly challenging when addressed in geographic representations. Abstraction and subjectivity are at the core of geographic information science,  as it is impossible to accurately and objectively represent a landscape on a map. This makes uncertainty and error inherent in geographic analyses, and emphasizes the importance of communicating those doubts as part of scientific knowledge and proliferation.  In my own work with GIS, I’ve used mechanisms like confusion matrices and root mean square errors to try to convey error, but I feel that these values don’t succeed in communicating the entirety of uncertainty in my study. It is difficult to quantify the choices that go into classification schemas or data processing and visualization.  This makes it also challenging to understand uncertainty in the work of others,   My coursework in Geography has emphasized the importance of thinking critically about the subjectivity of GIS analyses, but there has not been as much teaching of best practices for incorporating discussions of error and uncertainty in communication of results.
