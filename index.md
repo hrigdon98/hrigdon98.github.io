@@ -13,7 +13,7 @@ Hi, I am Hannah Rigdon and I'm really excited to be taking Open Source GIS this 
 - item number two
 
 # Musings
-- [Uncertainty and Error in GIS](musings)
+- [Uncertainty and Error in GIS](musings/uncertainty.md)
 
 The course website can be found [here](https://gis4dev.github.io).
 
