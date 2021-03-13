@@ -1,5 +1,5 @@
 ---
-title: Main page
+title: [Main page](https:\hrigdon98.github.io)
 layout: default
 ---
 ## Uncertainty and Error in Geography
