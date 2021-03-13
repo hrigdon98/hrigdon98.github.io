@@ -2,7 +2,7 @@
 title: Main page
 layout: default
 ---
-# Uncertainty and Error in Geography
+## Uncertainty and Error in Geography
 
 Expressions of error and uncertainty are particularly challenging when addressed in geographic representations. Abstraction and subjectivity are at the core of geographic information science,  as it is impossible to accurately and objectively represent a landscape on a map. This makes uncertainty and error inherent in geographic analyses, and emphasizes the importance of communicating those doubts as part of scientific knowledge and proliferation.  In my own work with GIS, I’ve used mechanisms like confusion matrices and root mean square errors to try to convey error, but I feel that these values don’t succeed in communicating the entirety of uncertainty in my study. It is difficult to quantify the choices that go into classification schemas or data processing and visualization.  This makes it also challenging to understand uncertainty in the work of others,   My coursework in Geography has emphasized the importance of thinking critically about the subjectivity of GIS analyses, but there has not been as much teaching of best practices for incorporating discussions of error and uncertainty in communication of results.
 
@@ -11,6 +11,6 @@ People take maps and cartographic representations as objective truth, which I th
 While  inherent subjectivity of the field is perhaps an insurmountable challenge for the field, it’s important for geographers to be transparent about the subjectivity and uncertainty in their work. While methods sections traditionally elaborate on the set of decisions that go into a geographic analyses, geographers should take particular care to elaborate on how their decisions influence the outcome of their studies, and note places where stories or voices might have gotten pushed to the side or left out. While I do think that more quantitative means of expressing error and uncertainty are valuable for evaluating the quality of research and analysis, I think that there is value to qualitative discussion and critique as well. Like we saw in class with the graph of p-values across disciplines, people don’t necessarily publish research with a lot of uncertainty, but I think that there is something to be gained from transparent discussions on uncertainty and error within a research context. 
 
 
-# Sources
+## Sources
 
 Longley, P. A., M. F. Goodchild, D. J. Maguire, and D. W. Rhind. 2008. Geographical information systems and science 2nd ed. Chichester: Wiley. (only chapter 6: Uncertainty, pages 127-153)
