@@ -70,20 +70,25 @@ Table 1. Site Measurements (in meters)
 
 Table 2. Rosgen Level I Classification
 | Criteria | Value |
-| :-: | :-: |
+
+| :---: |:---: |
+
 | Entrenchment Ratio | 50.89|
+
 | Width / Depth Ratio | 23.88526981 |
+
 | Sinuosity | 0.95 |
+
 | Level I Stream Type | C |
 
 Table 3. Rosgen Level II Classification
 | Criteria | Value |
-| :-: | :-: |
+| :---: | :---: |
 | Slope | 0.002 |
 | Channel Material | Gravel |
 | Level II Stream Type | C4b |
 
-![](rosgen/assets/rosgen_key.jpg)
+![](assets/rosgen_key.jpg)
 
 ## Discussion
 
