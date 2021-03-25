@@ -48,7 +48,9 @@ While our procedures were pretty similar to those of the Kasprak et al study, th
 
 ## Replication Results
 ![shaded relief](assets/shadedRelief.png)
-
+![slope](assets/slope.png)
+![streamLines](assets/streamLines.png)
+![valley centerlines](assets/ValleyLines.png)
 ![longitudinal profile](assets/longitudinalProfile.png)
 ![cross section](assets/crossSection.png)
 
