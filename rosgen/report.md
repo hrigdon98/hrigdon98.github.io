@@ -46,8 +46,8 @@ We then moved into RStudio and further analyzed our data to graph longitudinal p
 While our procedures were pretty similar to those of the Kasprak et al study, there are a few key differences. This analysis, as stated, relied entirely on open source software, so our calculations of values in Table 2 have a little more subjectivity than those that could be produced by a proprietary GIS tool. The other important difference is the resolution of our DEM data. The Kasprak study used elevation data with a resolution of 0.1 meters, whereas our DEM was 1m. Although you can see some artifacts in the shaded relief, 1m is still an incredibly fine resolution and shouldn't affect the outcome of our results.
 
 
-## Replication Results
-![shaded relief](./rosgen/assets/shadedRelief)
+## Replication Results did this work
+![shaded relief](rosgen/assets/shadedRelief.png)
 ![slope](rosgen/assets/slope)
 ![streamLines](rosgen/assets/streamLines)
 ![valley centerlines](rosgen/assets/valleyLines)
