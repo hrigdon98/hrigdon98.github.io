@@ -59,7 +59,7 @@ While our procedures were pretty similar to those of the Kasprak et al study, th
 Table 1. Site Measurements (in meters)
 
 | Variable | Value | Source |
-| :---: | :---: | :---: |
+| :--- | :---: | :---: |
 | Bankfull Width | 9.8264 | CHaMP_Data_MFJD |
 | Bankfull Depth Average  | 0.4114 | Dpth_Avg in CHaMP_Data_MFJD |
 | Bankfull Depth Max | 0.8571 | Dpth_Max in CHaMP_Data_MFJD |
@@ -72,7 +72,7 @@ Table 1. Site Measurements (in meters)
 Table 2. Rosgen Level I Classification
 
 | Criteria | Value |
-| :---: | :---: |
+| :--- | --- |
 | Entrenchment Ratio | 50.89 |
 | Width / Depth Ratio | 23.88526981 |
 | Sinuosity | 0.95 |
@@ -81,7 +81,7 @@ Table 2. Rosgen Level I Classification
 Table 3. Rosgen Level II Classification
 
 | Criteria | Value |
-| :---: | :---: |
+| :--- | :--- |
 | Slope | 0.002 |
 | Channel Material | Gravel |
 | Level II Stream Type | C4b |
