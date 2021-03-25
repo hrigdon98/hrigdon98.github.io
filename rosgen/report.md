@@ -38,15 +38,15 @@ Code and materials are available in this GitHub [repository] (https://github.com
 A detailed outline of GRASS procedures can be found [here](https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/protocols/1-Research_Protocol_GRASS.pdf). We used the models linked below to automate steps for loading and visualizing the data as well as averaging our digitized banks and valleys into centerlines.
 
 Models:
-- [Visualization] (https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/visualize.gxm)
-- [Center Line calculations] (https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/center_line_length.gxm)
+- [Visualization](https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/visualize.gxm)
+- [Center Line calculations](https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/center_line_length.gxm)
 
 We then moved into RStudio and further analyzed our data to graph longitudinal profiles and cross-section analyses, following this [R markdown document] (https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/2-ProfileViewer.Rmd).
 
 While our procedures were pretty similar to those of the Kasprak et al study, there are a few key differences. This analysis, as stated, relied entirely on open source software, so our calculations of values in Table 2 have a little more subjectivity than those that could be produced by a proprietary GIS tool. The other important difference is the resolution of our DEM data. The Kasprak study used elevation data with a resolution of 0.1 meters, whereas our DEM was 1m. Although you can see some artifacts in the shaded relief, 1m is still an incredibly fine resolution and shouldn't affect the outcome of our results.
 
 
-## Replication Results did this work
+## Replication Results
 ![shaded relief](assets/shadedRelief.png)
 ![slope](assets/slope.png)
 ![streamLines](assets/streamLines.png)
@@ -58,14 +58,15 @@ While our procedures were pretty similar to those of the Kasprak et al study, th
 
 Table 1. Site Measurements (in meters)
 | Variable | Value | Source |
-| :-: | :-: | :-: |
-| Bankfull Width | 9.8264 | CHaMP_Data_MFJD|
-| Bankfull Depth Average  | 0.4114 | Dpth_Avg in CHaMP_Data_MFJD|
-| Bankfull Depth Max | 0.8571 | Dpth_Max in CHaMP_Data_MFJD|
-| Valley Width  | 500 | Cross-section profile (Figure #)|
-| Valley Depth | 1.7142 |2x Bankfull Depth Max|
-| Stream/River Length |265| GRASS measurement of bank centerline|
-| Valley Length |280.157387 | GRASS measurement of valley centerline |
+
+| :---: | :---: | :---: |
+| Bankfull Width | 9.8264 | CHaMP_Data_MFJD |
+| Bankfull Depth Average  | 0.4114 | Dpth_Avg in CHaMP_Data_MFJD |
+| Bankfull Depth Max | 0.8571 | Dpth_Max in CHaMP_Data_MFJD |
+| Valley Width  | 500 | Cross-section profile |
+| Valley Depth | 1.7142 | 2x Bankfull Depth Max |
+| Stream/River Length | 265 | GRASS measurement of bank centerline |
+| Valley Length | 280.157387 | GRASS measurement of valley centerline |
 | Median Channel Material Particle Diameter | 67 | SubD50 in CHaMP_Data_MFJD  |
 
 Table 2. Rosgen Level I Classification
@@ -73,7 +74,7 @@ Table 2. Rosgen Level I Classification
 
 | :---: |:---: |
 
-| Entrenchment Ratio | 50.89|
+| Entrenchment Ratio | 50.89 |
 
 | Width / Depth Ratio | 23.88526981 |
 
@@ -83,9 +84,13 @@ Table 2. Rosgen Level I Classification
 
 Table 3. Rosgen Level II Classification
 | Criteria | Value |
+
 | :---: | :---: |
+
 | Slope | 0.002 |
+
 | Channel Material | Gravel |
+
 | Level II Stream Type | C4b |
 
 ![](assets/rosgen_key.jpg)
