@@ -47,12 +47,12 @@ While our procedures were pretty similar to those of the Kasprak et al study, th
 
 
 ## Replication Results did this work
-![shaded relief](rosgen/assets/shadedRelief.png)
-![slope](rosgen/assets/slope)
-![streamLines](rosgen/assets/streamLines)
-![valley centerlines](rosgen/assets/valleyLines)
-![longitudinal profile](rosgen/assets/longitudinalProfile.png)
-![cross section](rosgen/assets/crossSection.png)
+![shaded relief](assets/shadedRelief.png)
+![slope](assets/slope.png)
+![streamLines](assets/streamLines.png)
+![valley centerlines](assets/ValleyLines.png)
+![longitudinal profile](assets/longitudinalProfile.png)
+![cross section](assets/crossSection.png)
 
 
 
