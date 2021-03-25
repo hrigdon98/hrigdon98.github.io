@@ -38,7 +38,7 @@ Code and materials are available in this GitHub [repository] (https://github.com
 A detailed outline of GRASS procedures can be found [here](https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/protocols/1-Research_Protocol_GRASS.pdf). We used the models linked below to automate steps for loading and visualizing the data as well as averaging our digitized banks and valleys into centerlines.
 
 Models:
-- [Visualization](https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/visualize.gxm)
+- [Visualization] (https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/visualize.gxm)
 - [Center Line calculations] (https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/center_line_length.gxm)
 
 We then moved into RStudio and further analyzed our data to graph longitudinal profiles and cross-section analyses, following this [R markdown document] (https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/2-ProfileViewer.Rmd).
@@ -47,7 +47,7 @@ While our procedures were pretty similar to those of the Kasprak et al study, th
 
 
 ## Replication Results
-![shaded relief](rosgen/assets/shadedRelief)
+![shaded relief](./rosgen/assets/shadedRelief)
 ![slope](rosgen/assets/slope)
 ![streamLines](rosgen/assets/streamLines)
 ![valley centerlines](rosgen/assets/valleyLines)
