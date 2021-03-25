@@ -10,6 +10,7 @@ Hi, I am Hannah Rigdon and I'm a senior at Middlebury College studying Geography
 ## GIS Analysis
 
 - [Gravity Model for Spatial Interaction](gravity/gravity.md)
+- [Replicating the Rosgen Natural River Classification](rosgen/report.md)
 
 
 ## Musings
