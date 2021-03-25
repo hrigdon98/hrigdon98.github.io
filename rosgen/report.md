@@ -31,9 +31,9 @@ For the replication of the Kasprak study, each student in GEOG0323 Open Source G
 ## Materials and Procedure
 This analysis was replicated using entirely open source software. We used a combination of GRASS, QGIS 3.16 LTR, and RStudio. It is unclear what software was used in the Kasprak et al study, but it is assumed to be proprietary software. Our analysis also used a  1m LiDAR-derived DEM in place of field measurements to calculate our terrain-based metrics.
 
-My location was the study site identified by loc_id = 9 in the Columbia Habitat and Monitoring Program (CHaMP) [dataset.] (https://github.com/hrigdon98/RE-rosgen/tree/main/data/raw/public).
+My location was the study site identified by loc_id = 9 in the Columbia Habitat and Monitoring Program (CHaMP) [dataset.](https://github.com/hrigdon98/RE-rosgen/tree/main/data/raw/public).
 
-Code and materials are available in this GitHub [repository] (https://github.com/hrigdon98/RE-rosgen).
+Code and materials are available in this GitHub [repository](https://github.com/hrigdon98/RE-rosgen).
 
 A detailed outline of GRASS procedures can be found [here](https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/protocols/1-Research_Protocol_GRASS.pdf). We used the models linked below to automate steps for loading and visualizing the data as well as averaging our digitized banks and valleys into centerlines.
 
@@ -41,7 +41,7 @@ Models:
 - [Visualization](https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/visualize.gxm)
 - [Center Line calculations](https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/center_line_length.gxm)
 
-We then moved into RStudio and further analyzed our data to graph longitudinal profiles and cross-section analyses, following this [R markdown document] (https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/2-ProfileViewer.Rmd).
+We then moved into RStudio and further analyzed our data to graph longitudinal profiles and cross-section analyses, following this [R markdown document](https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/2-ProfileViewer.Rmd).
 
 While our procedures were pretty similar to those of the Kasprak et al study, there are a few key differences. This analysis, as stated, relied entirely on open source software, so our calculations of values in Table 2 have a little more subjectivity than those that could be produced by a proprietary GIS tool. The other important difference is the resolution of our DEM data. The Kasprak study used elevation data with a resolution of 0.1 meters, whereas our DEM was 1m. Although you can see some artifacts in the shaded relief, 1m is still an incredibly fine resolution and shouldn't affect the outcome of our results.
 
@@ -57,6 +57,7 @@ While our procedures were pretty similar to those of the Kasprak et al study, th
 
 
 Table 1. Site Measurements (in meters)
+
 | Variable | Value | Source |
 
 | :---: | :---: | :---: |
@@ -70,27 +71,22 @@ Table 1. Site Measurements (in meters)
 | Median Channel Material Particle Diameter | 67 | SubD50 in CHaMP_Data_MFJD  |
 
 Table 2. Rosgen Level I Classification
+
 | Criteria | Value |
 
 | :---: |:---: |
-
 | Entrenchment Ratio | 50.89 |
-
 | Width / Depth Ratio | 23.88526981 |
-
 | Sinuosity | 0.95 |
-
 | Level I Stream Type | C |
 
 Table 3. Rosgen Level II Classification
+
 | Criteria | Value |
 
 | :---: | :---: |
-
 | Slope | 0.002 |
-
 | Channel Material | Gravel |
-
 | Level II Stream Type | C4b |
 
 ![](assets/rosgen_key.jpg)
