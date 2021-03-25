@@ -15,10 +15,10 @@ and Replication by: Kasprak, A., N. Hough-Snee, T. Beechie, N. Bouwes, G. Brierl
 Replication Authors:
 Hannah Rigdon, Zach Hilgendorf, Joseph Holler, and Peter Kedron.
 
-Replication Materials Available at: [github repository name](github repository link)
+Replication Materials Available at: [https://github.com/hrigdon98/RE-rosgen]([https://github.com/hrigdon98/RE-rosgen])
 
 Created: `23 March 2021`
-Revised: `23 March 2021`
+Revised: `24 March 2021`
 
 ## Abstract
 The complexity of river systems pose a challenge for reproducible and transferable science, yet a common framework for describing hydrological systems is crucial to the success of watershed management, land use planning, natural hazard mitigation and much more. Rosgen's original study (1994) lays out a river classification system that seeks to standardize language and frame of reference for those working with river systems across disciplines. Rosgen's system focuses on sinuosity, entrenchment, and width of flood-prone areas to define 7 major river classes that are then broken down into Level II classifications based on slope and channel material. Kasprak et. al (2016) set out to implement the Rosgen classification system, in addition to others, to see how the different schemes compared and where they diverged. They used DEM data and field measurements  from the Middle Fork John Day Basin, which is a watershed of high conservation interest in the Columbia River Basin. Our study set out to test the reproducibility of both of these studies with GIS tools to see if river classification schemes could be successfully implemented without having to rely on site-specific field data, which would make river classification a much easier and accessible task.  
@@ -48,9 +48,7 @@ While our procedures were pretty similar to those of the Kasprak et al study, th
 
 ## Replication Results
 ![shaded relief](assets/shadedRelief.png)
-![slope](assets/slope.png)
-![streamLines](assets/streamLines.png)
-![valley centerlines](assets/ValleyLines.png)
+
 ![longitudinal profile](assets/longitudinalProfile.png)
 ![cross section](assets/crossSection.png)
 
