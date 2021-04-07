@@ -3,7 +3,7 @@ layout: page
 title: Impervious Landcover in Flood-Prone Areas of Dar es Salaam
 ---
 
-![floodplain map](assets/flood.png)
+![floodplain map](assets/flooding.png)
 
 ## Question and Overview
 
