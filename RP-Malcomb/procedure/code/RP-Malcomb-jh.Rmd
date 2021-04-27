@@ -1,0 +1,735 @@
+---
+output: html_document 
+---
+
+# Reproduction of Malcomb et al 2014
+
+#### Malcomb, D. W., E. A. Weaver, and A. R. Krakowka. 2014. Vulnerability modeling for sub-Saharan Africa: An operationalized approach in Malawi. Applied Geography 48:17-30.
+
+#### [https://doi.org/10.1016/j.apgeog.2014.01.004]([https://doi.org/10.1016/j.apgeog.2014.01.004)
+
+### Authors: Kufre Udoh, Joseph Holler, and Middlebury College Spring 2019 Geography 323 class
+
+### [https://gis4dev.github.io/](https://gis4dev.github.io/)
+
+
+```{r libraries, include = F}
+
+packages = c("downloader","haven","stars","dplyr","sf","rdhs", "classInt", "readr", "ggplot2", "here", "s2")
+setdiff(packages, rownames(installed.packages()))
+install.packages(setdiff(packages, rownames(installed.packages())), quietly=TRUE)
+
+library(downloader)
+library(haven)
+library(sf)
+library(stars)
+library(dplyr)
+library(here)
+library(classInt)
+library(rdhs)
+library(readr)
+library(ggplot2)
+library(s2)
+
+sf_use_s2(T)
+```
+
+```{r download data}
+# downloading data - here() handles file paths
+private_r = here("data","raw","private")
+public_r = here("data","raw","public")
+
+if (!"traditional_authorities" %in% list.files(public_r)){
+  # Malawi administrative areas from GADM version 2.8 https://gadm.org/download_country_v2.html
+  download("https://biogeo.ucdavis.edu/data/gadm2.8/shp/MWI_adm_shp.zip", here("data","raw","private", "MWI_adm_shp.zip"))
+  unzip(here("data","raw","private", "MWI_adm_shp.zip"), exdir = here("data","raw","public","traditional_authorities"))
+}
+
+if (!"livelihood_zones" %in% list.files(public_r)){
+  # Malawi livelihood zones from FEWS NET Data Center https://fews.net/fews-data/335
+  download("https://fews.net/data_portal_download/download?data_file_path=http%3A//shapefiles.fews.net.s3.amazonaws.com/LHZ/MW_LHZ_2009.zip", here("data","raw","private","MW_LHZ_2009.zip"))
+  unzip(here("data","raw","private","MW_LHZ_2009.zip"), exdir = here("data","raw","public","livelihood_zones"))
+}
+
+if (!"major_lakes.csv" %in% list.files(public_r)) {
+  # major lakes in malawi: http://www.masdap.mw/
+  download(
+    "http://www.masdap.mw/geoserver/ows?outputFormat=csv&service=WFS&srs=EPSG%3A4326&request=GetFeature&typename=geonode%3Amajor_lakes&version=1.0.0",
+    here("data","raw","public","major_lakes.csv")
+  )
+}
+```
+
+```{r dhs data access configuration}
+email = readline(prompt="Enter DHS Login Email: ")
+project = readline(prompt="Enter Project Name: ")
+rdhs_json = here("data","raw","private","rdhs.json")
+
+if (!file.exists(rdhs_json)) file.create(rdhs_json)
+
+# the information here was established through DHS project approval. See dhs-metadata.md in the data/metadata folder for details.
+# running this function will prompt you to enter email and project information in the Console and password in a popup
+set_rdhs_config(
+  email = email,
+  project = project,
+  config_path = rdhs_json,
+  global = FALSE,
+  cache_path = here("data","raw","private")
+)
+
+```
+
+```{r downloading dhs data}
+#ignore this because data is saved so we call on it specifically below
+dhs_downloads = get_datasets(
+  c("MWHR61SV", "MWGE62FL", "MWHR4ESV", "MWGE4BFL"),
+  all_lower = FALSE,
+  download_option = "rds"
+)
+```
+
+```{r 2010 adaptive capacity data}
+
+# reading in traditional authorities and livelihood zones
+ta = read_sf(here("data", "raw", "public","traditional_authorities", "MWI_adm2.shp")) %>%
+  st_make_valid() # fixing geometries
+
+lhz = read_sf(here("data", "raw", "public", "livelihood_zones", "MW_LHZ_2009.shp")) %>% st_make_valid()
+
+# reading in FEWsnet Livelihood Zones Data
+lhz_data = read_csv(here("data", "derived", "private", "LivelihoodSensitivity.csv"))
+
+# NEW! changing name of "Name" column to match lhz dataset
+lhz_data = lhz_data %>%
+  mutate(LZNAMEEN = Name) %>%
+  select(LZNAMEEN, PctFoodFromOwnFarm, PctCashFromLabor, PctCashFromCrops, Disaster)
+# NEW!
+lhz = lhz %>%
+  merge(lhz_data, by = "LZNAMEEN")
+
+# village points data
+dhsclusters_2010 = readRDS(here("data", "raw", "private", "datasets", "MWGE62FL.rds")) %>%
+  as("sf") %>% 
+  st_transform(3395) %>%  # reproject 
+  # joining id for traditional authorities and livelihood zones to dhs clusters
+  # allows us to know which ta every survey point belongs to so we can aggregate by attribute later
+  # adds ta and lhz id info to village points
+  st_join(st_transform(select(ta, ID_2),3395)) %>%
+  # NEW!
+  st_join(st_transform(select(lhz, FNID, PctFoodFromOwnFarm, PctCashFromLabor, PctCashFromCrops, Disaster),3395)) %>%
+  rename(ta_id = ID_2,
+         lhz_id = FNID,
+         # NEW!
+         food = PctFoodFromOwnFarm, labor = PctCashFromLabor, cashcrops = PctCashFromCrops, disaster = Disaster,
+         urban_rural = URBAN_RURA)
+
+# household level survey responses - not spatial
+dhshh_2010 = readRDS(here("data", "raw", "private", "datasets", "MWHR61SV.rds")) %>% zap_labels() 
+```
+
+```{r households to remove (2010)}
+# this chunk removes unknown/nodata values
+rmv_2010 = dhshh_2010 %>%  filter(
+  HV246A == 98 |
+    HV246A == 99 |
+    HV246D == 98 |
+    HV246D == 99 |
+    HV246E == 98 |
+    HV246E == 99 |
+    HV246G == 98 |
+    HV246G == 99 |
+    HV219  == 9 |
+    HV243A == 9 |
+    HV245  == 99 |
+    HV206  == 9 |
+    HV204  == 999 |
+    HV204  == 998 |
+    HV226  == 99 |
+    HV226  == 95 |
+    HV226  == 96 |
+    HV207  ==  9 
+) %>% pull(HHID)
+
+```
+
+```{r capacity in traditional authorities 2010}
+# returns adaptive capacity aggregated by ta (non spatial)
+ta_capacity_2010 = dhshh_2010 %>%
+  # joining traditional authority ids and urban_rural column by cluster ID number
+  left_join(st_drop_geometry(select(dhsclusters_2010, DHSCLUST, ta_id, urban_rural)), by = c("HV001" = "DHSCLUST")) %>%
+  select( # join only a few columns
+    HHID,
+    HV001,
+    HV002,
+    ta_id,
+    urban_rural, # indicates rural/urban
+    HV246A,  # livelihood indicators - livestock, land, water, etc
+    HV246D,  # goats
+    HV246E,  # sheep
+    HV246G,  # pigs
+    HV248,   # sick people age 18-59
+    HV245,   # land owned
+    HV271,   # wealth
+    HV251,
+    HV204,
+    HV206,
+    HV226,
+    HV219,
+    HV243A,
+    HV207
+  ) %>%
+  # removing values based on index and where there are NAs 
+  filter(!HHID %in% rmv_2010) %>% 
+  filter(!is.na(ta_id)) %>% 
+  # 24030 obs. of 19 variables 
+  # removing any surveys where all livestock values were NA
+  filter(!(is.na(HV246A) & is.na(HV246D) & is.na(HV246E)  & is.na(HV246G) )) %>% 
+  # 24028 obs. of 19 variables 
+  # using rowwise() to find sum of livestock by household 
+  rowwise %>%   # sums livestock columns across each row
+  mutate(hhlivestock = sum(HV246A, HV246D, HV246E, HV246G, na.rm = T)) %>%
+  ungroup %>%
+  # using percent_rank(), those  
+  # in cases where desc() is used, having a greater value before ranked makes a household more vulnerable 
+  mutate( # percent_rank() returns percentile between 0 and 1 - multiplying by 4 and adding 1 gives values 1-5 (quintiles)
+    livestock = percent_rank(hhlivestock) * 4 + 1,
+    sick = percent_rank(desc(HV248)) * 4 + 1,
+    land = percent_rank(HV245) * 4 + 1,
+    wealth = percent_rank(HV271) * 4 + 1,
+    orphans = percent_rank(desc(HV251)) * 4 + 1,
+    # changing 996 to 0 as it takes no time to get water on premises
+    HV204 = ifelse(HV204 == 996, 0, HV204),
+    water = percent_rank(desc(HV204)) * 4 + 1,
+    electricity = percent_rank(HV206) * 4 + 1,
+    cooking = percent_rank(desc(HV226)) * 4 + 1,
+    sexcat = percent_rank(desc(HV219)) * 4 + 1,
+    cellphone = percent_rank(desc(HV243A)) * 4 + 1,
+    radio = percent_rank(HV207) * 4 + 1,
+    urbanruralscore = ifelse(urban_rural == "U", 5, 1)
+  ) %>%
+  # calculating capacity score based on weights in table 2 in malcomb et al 
+  rowwise %>%
+  mutate(
+    capacity = sum(
+      livestock * 0.04,
+      sick * 0.03,
+      land * 0.06,
+      wealth * 0.04,
+      orphans * 0.03,
+      water * 0.04,
+      electricity * 0.03,
+      cooking * 0.02,
+      sexcat * 0.02,
+      cellphone * 0.04,
+      radio * 0.03,
+      urbanruralscore * 0.02,
+      # NAs are not removed here to filter out incomplete surveys later on
+      na.rm = F
+    ) 
+  ) %>%  
+  # removing incomplete surveys 
+  filter(!is.na(capacity))%>%
+  # 19996 obs. of 33 variables 
+ # ungroup %>%   # necessary? has the data been grouped before this?
+  group_by(ta_id) %>%
+  summarize(
+    capacity_avg = mean(capacity),
+    capacity_min = min(capacity),
+    capacity_max = max(capacity),
+    capacity_sd = sd(capacity)
+  ) 
+```
+
+```{r processing livelihood zones data}
+# NEW!
+lhz_sensitivity <- dhshh_2010 %>%
+  left_join(st_drop_geometry(select(dhsclusters_2010, DHSCLUST, ta_id, food, labor, cashcrops, disaster)), by = c("HV001" = "DHSCLUST")) %>%
+  select(
+    HHID,
+    ta_id,
+    food,
+    labor,
+    cashcrops,
+    disaster
+  ) %>%
+  filter(!HHID %in% rmv_2010) %>%    #24640 obs, 5 vars
+  filter(!is.na(ta_id)) %>%          #24030 obs, vars
+  mutate(
+    foodscore = percent_rank(food) * 4 + 1,  # assuming greater reliance on one's own farm is worse?
+    laborscore = percent_rank(labor) * 4 + 1, # assuming greater reliance on wages is worse for vulnerability?
+    cropscore = percent_rank(desc(cashcrops)) * 4 + 1, # assuming greater reliance on cash from crops leads to more vulnerability?
+    disasterscore = percent_rank(desc(disaster)) * 4 +1
+  ) %>%
+  rowwise %>%
+  mutate(sensitivity = sum(
+    foodscore * 0.06,
+    laborscore * 0.06,
+    cropscore * 0.04,
+    disasterscore * 0.04,
+    na.rm = F
+  )) %>%
+    filter(!is.na(sensitivity))%>%
+  group_by(ta_id) %>%
+  summarize(
+    sensitivity_avg = mean(sensitivity),
+    sensitivity_min = min(sensitivity),
+    sensitivity_max = max(sensitivity),
+    sensitivity_sd = sd(sensitivity)
+  )
+```
+
+
+```{r joining 2010 capacity to ta and creating breaks for visualization}
+
+# join mean capacity to traditional authorities
+ta = left_join(
+  ta,
+  select(ta_capacity_2010, ta_id, capacity_2010 = capacity_avg),
+  by = c("ID_2" = "ta_id")
+)
+
+#ta = left_join(
+#  ta,
+#  select(lhz_sensitivity, ta_id, sensitivity = sensitivity_avg),
+#  by = c("ID_2" = "ta_id")
+#)
+
+# making capacity score resemble malcomb et al's work - assets and access weighted by 20%
+ ta = mutate(ta, capacity_2010 = capacity_2010 * 20)
+# same, but with the sensitivity added
+#ta = mutate(ta, capacity_sensitivity = (capacity_2010 + sensitivity) * 20)
+# 256 features 
+
+# preparing breaks for mapping using natural jenks method - returns list of break points
+ta_brks = filter(ta, !is.na(capacity_2010)) %>% {classIntervals(.$capacity_2010, 4, style = "jenks")$brks}
+# rounds each capacity score
+ta_int = lapply(1:4, function(x) paste0(round(ta_brks[x],2)," - ", round(ta_brks[x +1],2))) %>% unlist()
+# groups capacity scores into discrete groups based on the break points in ta_brks
+ta = mutate(ta, capacity_2010_brks = case_when(
+  capacity_2010 <= ta_brks[2] ~ ta_int[1],
+  capacity_2010 <= ta_brks[3] ~ ta_int[2],
+  capacity_2010 <= ta_brks[4] ~ ta_int[3],
+  capacity_2010 >  ta_brks[4] ~ ta_int[4]
+))
+```
+
+```{r normalizing livelihood zones}
+
+lhz_calc <- lhz %>%
+select(
+    PctFoodFromOwnFarm,
+    PctCashFromLabor,
+    PctCashFromCrops,
+    Disaster,
+    geometry
+  ) %>%
+  mutate(
+    foodscore = percent_rank(PctFoodFromOwnFarm) * 4 + 1,  # assuming greater reliance on one's own farm is worse?
+    laborscore = percent_rank(PctCashFromLabor) * 4 + 1, # assuming greater reliance on wages is worse for vulnerability?
+    cropscore = percent_rank(desc(PctCashFromCrops)) * 4 + 1, # assuming greater reliance on cash from crops leads to more vulnerability?
+    disasterscore = percent_rank(desc(Disaster)) * 4 +1
+  ) %>%
+  rowwise %>%
+  mutate(sensitivity = sum(
+    foodscore * 0.06,
+    laborscore * 0.06,
+    cropscore * 0.04,
+    disasterscore * 0.04,
+    na.rm = F
+  ))
+
+```
+
+```{r saving adaptive capacity scores}
+save(
+  ta_capacity_2010,
+  file = here("data", "derived", "public", "adaptive_capacity.rData")
+)
+```
+
+```{r reading rasters into r}
+# UNEP layers
+dr = read_stars(here("data", "raw", "public", "dr1010ipeykx.tif")) %>% 
+  st_set_crs(4326) 
+
+fl = read_stars(here("data", "raw", "public",  "fl1010irmt.tif")) %>% 
+  st_set_crs(4326) 
+
+```
+
+```{r cleaning and reprojecting rasters}
+# creating blank raster in extent
+b = st_bbox(
+  c(
+    xmin = 35.9166666666658188,
+    xmax = 32.6666666666658330,
+    ymin = -9.3333333333336554,
+    ymax = -17.0833333333336270
+  ),
+  crs = st_crs(4326)
+) %>%
+  st_as_sfc()
+
+blank = st_as_stars(st_bbox(b), dx = 0.041667, dy = 0.041667)
+blank[[1]][] = NA
+
+# reprojecting, clipping, and resampling rasters to new extent and cell size
+# use bilinear for drought to average continuous population exposure values
+dr = st_warp(dr, blank, use_gdal = T, method = "bilinear")
+# use nearest neighbor for flood risk to preserve integer values
+fl = st_warp(fl, blank, method = "near")  
+
+# removing factors from fl - makes categorical flood data numeric
+nmrc = as.numeric(levels(fl[[1]]))[fl[[1]]]
+fl = blank
+fl[[1]][] = nmrc  # bracket syntax gets at different raster bands/layers - we only have one to deal with
+```
+
+```{r rasterizing geometries}
+# clipping traditional authorities with livelihood zones in order to remove lake
+st_clip = function(x,y) st_intersection(x, st_union(st_geometry(y)))
+
+st_agr(ta) = "constant"
+
+ta_2010 = st_clip(st_transform(filter(ta, is.na(capacity_2010) == F), 3395), st_buffer(st_transform(lhz, 3395), .01)) %>%
+  st_transform(4326)
+# 222 features 
+
+# making capacity rasters from ta capacities
+ta_capacity = st_rasterize(ta_2010[, 'capacity_2010'], blank)
+
+lhz_capacity = st_rasterize(lhz_calc[,'sensitivity'], blank) 
+```
+
+```{r function to calculate vulnerability}
+vulnerability = function(geo, lhz_raster) {
+  # creating mask layer
+  mask = geo 
+  mask[mask > 0] = 1   # this keeps points where we have a capacity score
+  mask[mask == 0] = NA  # sets points without a capacity score to no data
+  
+  # masking flood and drought 
+  flood = fl * mask * 4
+  drought = dr * mask
+  
+  # reclassifying drought layer - creates quintile breaks
+  qt = quantile(drought[[1]], probs = seq(0, 1, 0.2), na.rm = T)
+  # assigns cells to groups based on breaks calculated above
+  drought = drought %>%
+    mutate(
+      recoded = case_when(
+        drought[[1]] <= qt[[2]] ~ 1,
+        drought[[1]] <= qt[[3]] ~ 2,
+        drought[[1]] <= qt[[4]] ~ 3,
+        drought[[1]] <= qt[[5]] ~ 4,
+        drought[[1]] > qt[[5]] ~ 5
+      )
+    ) %>% select(recoded) * 4
+  
+  # final output (adding component rasters)
+  final = (40 - geo) * 0.40 + (20 - 20 * lhz_raster) * 0.20 + drought * 0.20 + flood * 0.20
+}
+```
+
+```{r creating final vulnerability layers}
+ta_final = vulnerability(ta_capacity, lhz_capacity)
+
+ta_2010$vuln = aggregate(ta_final,ta_2010,mean)$capacity_2010
+
+#????
+ta_2010$vuln2 = aggregate(ta_final,ta_2010,mean)$capacity_sensitivity
+```
+
+```{r misc. map features}
+# adds lakes for cartography
+lakes = st_as_sf(read_csv(here(public_r, "major_lakes.csv"))[, c("name", "the_geom")],
+                 wkt = "the_geom",
+                 crs = 4326) %>%
+  st_geometry %>%
+  st_union %>%
+  st_sf %>%
+  mutate(EA = "Major Lakes of Malawi")
+
+# creates a layer of national parks/reserves
+ea = lhz %>%
+  st_transform(3395) %>%  #transform to world mercator (jh: not sure if we need to transform to 3395 and back here?)
+  summarize %>%  
+  st_geometry %>%  #dissolve to one feature / one geometry
+  st_intersection(st_geometry(st_transform(ta, 3395))) %>%   #intersect with traditional authorities to clip them
+  st_transform(4326) %>%
+  st_sf %>%  #make into new simple features data frame
+  mutate(EA = case_when(
+    grepl("Reserve", ta[["NAME_2"]]) | grepl("Park", ta[["NAME_2"]]) ~ "National Parks and Reserves",
+    T ~ "Missing Data") ) %>%   # search and replace names- anything with Reserve or Park in the name becomes National Parks and Reserves
+  rbind(lakes) %>%  # combines with lakes to make one natural features layer
+  st_make_valid()
+
+```
+
+```{r 2010 adaptive capacity map}
+map_2010 = ggplot() +
+  geom_sf(data = ea,
+          aes(fill = EA),
+          color = NA) +
+  geom_sf(
+    data = ta_2010,
+    aes(fill = capacity_2010_brks),
+    color = "white",
+    lwd = .2
+  ) + scale_fill_manual(
+    values = list(
+      "Missing Data" = "#FFC389",
+      "National Parks and Reserves" = "#D9EABB",
+      "Major Lakes of Malawi" = "lightblue",
+      "13.95 - 15.84" = "#333333",
+      "15.84 - 17.13" = "#666666",
+      "17.13 - 18.89" = "#999999",
+      "18.89 - 21.36" = "#CCCCCC"
+    )
+  ) +
+  scale_x_continuous(breaks = c(33,34,35,36)) +
+  labs(title = "Adaptive Capacity Scores Based on 2010 DHS Surveys in 222 Traditional Authorities") +
+  theme_minimal() +
+  theme(legend.title = element_blank())
+
+map_2010
+```
+
+```{r vulnerability map}
+clrs = mutate(
+  ea,
+  colors = case_when(
+    EA == "Missing Data" ~ "#999999",
+    EA == "National Parks and Reserves" ~ "#D9EABB",
+    EA == "Major Lakes of Malawi" ~ "lightblue"
+  )
+)$colors
+
+vuln_map = ggplot() +
+  geom_sf(data = ea,
+          fill = clrs,
+          color = NA) +
+  geom_stars(data = ta_final) +
+  scale_fill_gradient(
+    low = "#FFFF75",
+    high = "#CF4611",
+    breaks = c(10.41,  19.07),
+    labels = c("Lower Vulnerability", "Higher Vulnerability"),
+    na.value = "transparent",
+    guide = "colourbar",
+    limits = c(10.41,  19.07)
+  ) +
+  scale_x_continuous(breaks = c(33,34,35,36)) +
+  labs(title = "Malawi Vulnerability to Climate Change") +
+  theme_minimal() +
+  theme(
+    legend.title = element_blank(),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank()
+  )
+
+vuln_map
+```
+
+```{r saving maps}
+
+save(map_2010, vuln_map, file = here("results","maps","maps.Rdata"))
+
+ggsave(
+  here("results","maps","ac_2010.png"),
+  plot = map_2010,
+  width = 8.5,
+  height = 11,
+  units = "in"
+)
+ggsave(
+  here("results","maps","vulnerability2.png"),
+  plot = vuln_map,
+  width = 8.5,
+  height = 11,
+  units = "in"
+)
+```
+
+
+```{r}
+#comparing discrete choropleth maps
+or_fig4 = # load original figure 4 data
+  read_sf(here("data", "derived", "public", "georeferencing2.gpkg"), 
+          layer="ta_resilience") %>% 
+  # load ta_resilience layer from georeferencing geopackage
+  st_drop_geometry() %>%
+  # remove the geometry data because two geometries cannot be joined
+  select(c(ID_2,resilience)) %>%  
+  # select only the ID_2 and resilience columns
+  na.omit()
+  # remove records with null values
+
+rp_fig4 = ta_2010 %>% # prepare our reproduction of figure 4 data
+  select(c(ID_2,capacity_2010)) %>%  
+  # select only the ID_2 and resilience columns
+  # note: geometry columns are 'sticky' -- only way to remove is st_drop_geometry()
+  na.omit()  %>%
+  # remove records with null values
+  mutate(rp_res = case_when(
+  capacity_2010 <= ta_brks[2] ~ 1,
+  capacity_2010 <= ta_brks[3] ~ 2,
+  capacity_2010 <= ta_brks[4] ~ 3,
+  capacity_2010 >  ta_brks[4] ~ 4
+))
+# code the capacity scores as integers, as we see them classified on the map. 
+#ta_brks was the result of a Jenks classification, as noted on Malcomb et al's maps
+
+fig4compare = inner_join(rp_fig4,or_fig4,by="ID_2") %>%  
+  #inner join on field ID_2 keeps only matching records
+  filter(rp_res>0 & rp_res<5 & resilience > 0 & resilience < 5)
+  # keep only records with valid resilience scores
+
+table(fig4compare$resilience,fig4compare$rp_res)
+# crosstabulation with frequencies
+
+cor.test(fig4compare$resilience,fig4compare$rp_res,method="spearman")
+# Spearman's Rho correlation test
+
+fig4compare = mutate(fig4compare, difference = rp_res - resilience) 
+# Calculate difference between the maps so that you can create a difference map
+
+map3 =ggplot() +
+  geom_sf(data = ea,
+          aes(fill = EA),
+          color = NA) +
+  geom_sf(
+    data = fig4compare,
+    aes(fill = factor(difference)),
+    color = "white",
+    lwd = .2
+  ) + 
+  scale_fill_manual("Reproduction With Respect \nTo Original Study",
+                    limits = c("-2","-1","0","1","2","Missing Data","Major Lakes of Malawi","National Parks and Reserves"), 
+                    labels = c(
+                      "-2" = "Two Intervals Lower",
+                      "-1" = "One Interval Lower",
+                      "0" = "Match",
+                      "1" = "One Interval Higher",
+                      "2" = "Two Intervals Higher",
+                      "Missing Data" = "Missing Data",
+                      "Major Lakes of Malawi" = "Major Lakes of Malawi",
+                      "National Parks and Reserves" = "National Parks and Reserves"
+                    ),
+                    values = c("-2"="#e66101","-1"="#fdb863","0"="#cccccc","1"="#9f95cc","2"="#5e3c99","Missing Data"="#8a8a8a","Major Lakes of Malawi"="lightblue","National Parks and Reserves"="#D9EABB"))+
+  scale_x_continuous(breaks = c(33,34,35,36)) +
+  labs(title = "Comparing Adaptive Capacity Results", subtitle = "Original Study vs. Reproduction") +
+  theme_minimal()
+map3
+```
+
+```{r}
+#comparing continuous raster maps
+orfig5vect = 
+  read_sf(here("data", "derived", "public", "georeferencing3.gpkg"), 
+          layer="vulnerability_grid")
+# load original figure 5 data
+
+orfig5rast = st_rasterize(orfig5vect["b_mean"], template=ta_final)
+# convert mean of blue values into a raster using ta_final as a reference for raster
+# extent, cell size, CRS, etc.
+
+orfig5rast = orfig5rast %>% 
+  mutate(or = 1-
+           (b_mean - min(orfig5rast[[1]], na.rm= TRUE)) /
+           (max(orfig5rast[[1]], na.rm= TRUE) -
+            min(orfig5rast[[1]], na.rm= TRUE)
+        )
+)  # or is Re-scaled from 0 to 1 with (value - min)/(max - min)
+# it is also inverted, because higher blue values are less red
+
+
+ta_final = ta_final %>% 
+  mutate(rp =
+           (capacity_2010 - min(ta_final[[1]], na.rm= TRUE)) /
+           (max(ta_final[[1]], na.rm= TRUE) -
+            min(ta_final[[1]], na.rm= TRUE)
+        )
+)  # rp is Re-scaled from 0 to 1 with (value - min)/(max - min)
+
+fig5comp = c( select(ta_final,"rp"), select(orfig5rast,"or"))
+# combine the original (or) fig 5 and reproduced (rp) fig 5
+
+fig5comp = fig5comp %>% mutate( diff = rp - or )
+# calculate difference between the original and reproduction,
+# for purposes of mapping
+
+fig5comppts = st_as_sf(fig5comp)
+# convert raster to vector points to simplify plotting and correlation testing
+
+plot(fig5comppts$or, fig5comppts$rp, xlab="Original Study", ylab="Reproduction")
+# create scatterplot of original results and reproduction results
+ 
+cor.test(fig5comppts$or, fig5comppts$rp, method="spearman")
+# Spearman's Rho correlation test
+
+# Hint for mapping raster results: refer to the diff raster attribute
+# in the fig5comp stars object like this: fig5comp["diff"]
+
+```
+
+```{r}
+# plotting difference map for figure 4
+ggsave(
+  here("results","maps","ac_difference.png"),
+  plot = map3,
+  width = 8.5,
+  height = 11,
+  units = "in"
+)
+```
+
+```{r}
+#difference results for figure 5
+vuln_diff = ggplot() +
+  geom_sf(data = ea,
+          fill = clrs,
+          color = NA) +
+  geom_stars(data = fig5comp["diff"]) +
+  scale_fill_gradient2(
+    midpoint = 0,
+    low = "blue",
+    mid = "white",
+    high = "red",
+    space = "Lab",
+    breaks = c(-1,  1),
+    labels = c("Reproduction Vulnerability Lower", "Reproduction Vulnerability Higher"),
+    na.value = "transparent",
+    guide = "colourbar",
+    limits = c(-1,  1)
+  ) +
+  scale_x_continuous(breaks = c(33,34,35,36)) +
+  labs(title = "Comparing Vulnerability Results", subtitle = "Original Study vs. Reproduction") +
+  theme_minimal() +
+  theme(
+    legend.title = element_blank(),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank()
+  )
+
+vuln_diff
+
+ggsave(
+  here("results","maps","vuln_difference.png"),
+  plot = vuln_diff,
+  width = 8.5,
+  height = 11,
+  units = "in"
+)
+```
+
+
+```{r saving spatial data outputs}
+results = here("data","derived","public","results.gpkg")
+
+write_stars(ta_final, here("data","derived","public","ta_capacity.tif"))
+
+write_sf(ta_2010, results, "ta_2010")
+
+write_sf(lhz, results, "lhz")
+```
