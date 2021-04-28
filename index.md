@@ -12,6 +12,7 @@ Hi, I am Hannah Rigdon and I'm a senior at Middlebury College studying Geography
 - [Gravity Model for Spatial Interaction](gravity/gravity.md)
 - [Replicating the Rosgen Natural River Classification](rosgen/report.md)
 - [Urban Resilience in Dar es Salaam using PostGIS](dsm_resilience/dsm_resilience_report.md)
+- [Reproduction of Vulnerability Model in Malawi](RP-Malcomb/docs/report/RP-Malcomb-Report.md)
 
 
 ## Musings
