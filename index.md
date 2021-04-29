@@ -19,6 +19,7 @@ Hi, I am Hannah Rigdon and I'm a senior at Middlebury College studying Geography
 - What is Open Source GIS?
 - Is GIS a Science?
 - [Uncertainty and Error in GIS](musings/uncertainty.md)
+- [Spatial Analysis with Twitter Data](musings/reproduction_reproducibility.md)
 
 ## Links
 The course website can be found [here](https://gis4dev.github.io).
