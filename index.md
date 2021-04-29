@@ -23,7 +23,6 @@ Hi, I am Hannah Rigdon and I'm a senior at Middlebury College studying Geography
 
 ## Links
 The course website can be found [here](https://gis4dev.github.io).
-
 The link to access this GitHub repository can be found [here](hrigdon98.github.io)
 
-Thanks for stopping by!
+
