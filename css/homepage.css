@@ -9,10 +9,10 @@ body{background: #FFFFFF;
 h1{
     font-size: 45px; /*psuedoclass*/
     color:black;
-    text-transform: uppercase;
+    
     letter-spacing: 3px;
     word-spacing: 5px;
-    text-shadow:2px 2px teal;
+    
     font-weight: bold;
 }
 
@@ -22,14 +22,6 @@ h1{
 
 }
 
-h1{
-    font-size: 45px; /*psuedoclass*/
-    color:black;
-    
-    letter-spacing: 3px;
-    word-spacing: 5px;
-    
-    font-weight: bold;
-}
+
 
 
