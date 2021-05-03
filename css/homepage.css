@@ -8,7 +8,7 @@ body{background: #FFFFFF;
 
 h1{
     font-size: 45px; /*psuedoclass*/
-    color:white;
+    color:black;
     text-transform: uppercase;
     letter-spacing: 3px;
     word-spacing: 5px;
@@ -17,8 +17,8 @@ h1{
 }
 
 .blurb{
-    color: white;
-    font-size: 200px;
+    color: black;
+    font-size: 12px;
 
 }
 
