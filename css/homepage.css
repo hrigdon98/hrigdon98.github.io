@@ -1,0 +1,39 @@
+
+
+
+body{background: #FFFFFF; 
+    text-align: center;
+    font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
+h1{
+    font-size: 45px; /*psuedoclass*/
+    color:white;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    word-spacing: 5px;
+    text-shadow:2px 2px teal;
+    font-weight: bold;
+}
+
+.blurb{
+    color: white;
+    font-size: 200px;
+
+}
+
+h1{
+    font-size: 45px; /*psuedoclass*/
+    color:black;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    word-spacing: 5px;
+    text-shadow:2px 2px teal;
+    font-weight: bold;
+}
+
+.blurb{
+    color: black;
+    font-size: 200px;
+
+}
