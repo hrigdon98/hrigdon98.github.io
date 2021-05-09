@@ -53,14 +53,13 @@
 <p style="text-align:left"> This analysis was replicated using entirely open source software. We used a combination of GRASS, QGIS 3.16 LTR, and RStudio. It is unclear what software was used in the Kasprak et al study, but it is assumed to be proprietary software. Our analysis also used a  1m LiDAR-derived DEM in place of field measurements to calculate our terrain-based metrics. </p>
 
 <p style="text-align:left">My location was the study site identified by loc_id = 9 in the Columbia Habitat and Monitoring Program (CHaMP)<a href = "https://github.com/hrigdon98/RE-rosgen/tree/main/data/raw/public">dataset.</a></p>
-<p style="text-align:left">Code and materials are available in this Github <a href = "https://github.com/hrigdon98/RE-rosgen">repository.</a> </p>
+<p style="text-align:left">Code and materials are available in this Github <a href = "https://github.com/hrigdon98/RE-rosgen">repository.</a></p>
 
 <p style="text-align:left"> A detailed outline of GRASS procedures can be found <a href = "https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/protocols/1-Research_Protocol_GRASS.pdf">here.</a> We used the models linked below to automate steps for loading and visualizing the data as well as averaging our digitized banks and valleys into centerlines.</p>
 
- <h5 style="text-align:left" > Model </h5>
-                 
- <p style="text-align:left> <a href = "https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/visualize.gxm"> Visualization </a> </p>
- <p style="text-align:left> <a href= "https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/center_line_length.gxm"> Center Line calculations</a> </p>
+ <h3 style="text-align:left" > Models: </h3>
+ <p style="text-align:left"><a href = "https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/visualize.gxm">Visualization</a> </p>
+ <p style="text-align:left><a href= "https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/center_line_length.gxm">Center Line calculations</a></p>
 
 <p style="text-align:left> We then moved into RStudio and further analyzed our data to graph longitudinal profiles and cross-section analyses, following this <a href = "https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/2-ProfileViewer.Rmd">R markdown document.</a> While our procedures were pretty similar to those of the Kasprak et al study, there are a few key differences. This analysis, as stated, relied entirely on open source software, so our calculations of values in Table 2 have a little more subjectivity than those that could be produced by a proprietary GIS tool. The other important difference is the resolution of our DEM data. The Kasprak study used elevation data with a resolution of 0.1 meters, whereas our DEM was 1m. Although you can see some artifacts in the shaded relief, 1m is still an incredibly fine resolution and shouldn't affect the outcome of our results.</p>
 
