@@ -41,7 +41,7 @@
       <p style="text-align:left">Created: 23 March 2021</p>
       <p style="text-align:left">Revised: 24 March 2021 </p>
 
-<h2 style="text-align:left" > Abstract
+      <h2 style="text-align:left" > Abstract </h2>
 <p style="text-align:left">The complexity of river systems pose a challenge for reproducible and transferable science, yet a common framework for describing hydrological systems is crucial to the success of watershed management, land use planning, natural hazard mitigation and much more. Rosgen's original study (1994) lays out a river classification system that seeks to standardize language and frame of reference for those working with river systems across disciplines. Rosgen's system focuses on sinuosity, entrenchment, and width of flood-prone areas to define 7 major river classes that are then broken down into Level II classifications based on slope and channel material. Kasprak et. al (2016) set out to implement the Rosgen classification system, in addition to others, to see how the different schemes compared and where they diverged. They used DEM data and field measurements  from the Middle Fork John Day Basin, which is a watershed of high conservation interest in the Columbia River Basin. Our study set out to test the reproducibility of both of these studies with GIS tools to see if river classification schemes could be successfully implemented without having to rely on site-specific field data, which would make river classification a much easier and accessible task.</p>  
 
 
@@ -58,17 +58,19 @@
 
  <p style="text-align:left> A detailed outline of GRASS procedures can be found <a href = "https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/protocols/1-Research_Protocol_GRASS.pdf">here.</a> We used the models linked below to automate steps for loading and visualizing the data as well as averaging our digitized banks and valleys into centerlines.
 
-Models:
-- [Visualization](https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/visualize.gxm)
-- [Center Line calculations](https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/center_line_length.gxm)
+      <h3 style="text-align:left>Models:</h3>
+                 
+                 <p style="text-align:left> - <a href = "https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/visualize.gxm">Visualization </a>
+        <p style="text-align:left> - <a href= "https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/center_line_length.gxm"> Center Line calculations </p>
 
-We then moved into RStudio and further analyzed our data to graph longitudinal profiles and cross-section analyses, following this [R markdown document](https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/2-ProfileViewer.Rmd).
+<p style="text-align:left> We then moved into RStudio and further analyzed our data to graph longitudinal profiles and cross-section analyses, following this <a href = "https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/2-ProfileViewer.Rmd">R markdown document.
 
-While our procedures were pretty similar to those of the Kasprak et al study, there are a few key differences. This analysis, as stated, relied entirely on open source software, so our calculations of values in Table 2 have a little more subjectivity than those that could be produced by a proprietary GIS tool. The other important difference is the resolution of our DEM data. The Kasprak study used elevation data with a resolution of 0.1 meters, whereas our DEM was 1m. Although you can see some artifacts in the shaded relief, 1m is still an incredibly fine resolution and shouldn't affect the outcome of our results.
+While our procedures were pretty similar to those of the Kasprak et al study, there are a few key differences. This analysis, as stated, relied entirely on open source software, so our calculations of values in Table 2 have a little more subjectivity than those that could be produced by a proprietary GIS tool. The other important difference is the resolution of our DEM data. The Kasprak study used elevation data with a resolution of 0.1 meters, whereas our DEM was 1m. Although you can see some artifacts in the shaded relief, 1m is still an incredibly fine resolution and shouldn't affect the outcome of our results.</p>
 
-
-## Replication Results
-![shaded relief](assets/shadedRelief.png)
+ <h2 style="text-align:left>Replication Results</h2>
+            <img src="./assets/shadedRelief.png" class = "image">
+                   
+<imgassets/shadedRelief.png)
 ![slope](assets/slope.png)
 ![streamLines](assets/streamLines.png)
 ![valley centerlines](assets/ValleyLines.png)
