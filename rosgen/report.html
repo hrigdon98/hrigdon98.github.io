@@ -27,36 +27,36 @@
       <hr>
  
   
-      <h1> Replication of a classification of Natural Rivers </h1>
+      <h1 style="text-align:left"> Replication of a classification of Natural Rivers </h1>
       
-      <p>Original study Rosgen, D. L. in CATENA 22 (3):169–199. https://linkinghub.elsevier.com/retrieve/pii/0341816294900019.</p>
+      <p style="text-align:left">Original study Rosgen, D. L. in CATENA 22 (3):169–199. https://linkinghub.elsevier.com/retrieve/pii/0341816294900019.</p>
 
 
-<p>and Replication by: Kasprak, A., N. Hough-Snee, T. Beechie, N. Bouwes, G. Brierley, R. Camp, K. Fryirs, H. Imaki, M. Jensen, G. O’Brien, D. Rosgen, and J. Wheaton. 2016. The Blurred Line between Form and Process: A Comparison of Stream Channel Classification Frameworks ed. J. A. Jones. *PLOS ONE* 11 (3):e0150293. https://dx.plos.org/10.1371/journal.pone.0150293. </p>
+<p style="text-align:left">and Replication by: Kasprak, A., N. Hough-Snee, T. Beechie, N. Bouwes, G. Brierley, R. Camp, K. Fryirs, H. Imaki, M. Jensen, G. O’Brien, D. Rosgen, and J. Wheaton. 2016. The Blurred Line between Form and Process: A Comparison of Stream Channel Classification Frameworks ed. J. A. Jones. *PLOS ONE* 11 (3):e0150293. https://dx.plos.org/10.1371/journal.pone.0150293. </p>
 
-<p>Replication Authors:
+<p style="text-align:left">Replication Authors:
   Hannah Rigdon, Zach Hilgendorf, Joseph Holler, and Peter Kedron.</p>
 
-<p>Replication Materials Available at: <a href = "https://github.com/hrigdon98/RE-rosgen">https://github.com/hrigdon98/RE-rosgen </a> </p>
-      <p>Created: `23 March 2021`</p>
-      <p>Revised: `24 March 2021`</p>
+<p style="text-align:left">Replication Materials Available at: <a href = "https://github.com/hrigdon98/RE-rosgen">https://github.com/hrigdon98/RE-rosgen </a> </p>
+      <p style="text-align:left">Created: 23 March 2021</p>
+      <p style="text-align:left">Revised: 24 March 2021 </p>
 
-## Abstract
-The complexity of river systems pose a challenge for reproducible and transferable science, yet a common framework for describing hydrological systems is crucial to the success of watershed management, land use planning, natural hazard mitigation and much more. Rosgen's original study (1994) lays out a river classification system that seeks to standardize language and frame of reference for those working with river systems across disciplines. Rosgen's system focuses on sinuosity, entrenchment, and width of flood-prone areas to define 7 major river classes that are then broken down into Level II classifications based on slope and channel material. Kasprak et. al (2016) set out to implement the Rosgen classification system, in addition to others, to see how the different schemes compared and where they diverged. They used DEM data and field measurements  from the Middle Fork John Day Basin, which is a watershed of high conservation interest in the Columbia River Basin. Our study set out to test the reproducibility of both of these studies with GIS tools to see if river classification schemes could be successfully implemented without having to rely on site-specific field data, which would make river classification a much easier and accessible task.  
-
-
-### Sampling Plan and Data Description
-For the replication of the Kasprak study, each student in GEOG0323 Open Source GIS was randomly assigned a study location from the 33 study locations analyzed by Kasprak et al 2016. The 33 study sites were originally chosen by Kasprak et al. from a stratified sampling of CHaMP data surveys conducted in 2012 and 2013.
+<h2 style="text-align:left" > Abstract
+<p style="text-align:left">The complexity of river systems pose a challenge for reproducible and transferable science, yet a common framework for describing hydrological systems is crucial to the success of watershed management, land use planning, natural hazard mitigation and much more. Rosgen's original study (1994) lays out a river classification system that seeks to standardize language and frame of reference for those working with river systems across disciplines. Rosgen's system focuses on sinuosity, entrenchment, and width of flood-prone areas to define 7 major river classes that are then broken down into Level II classifications based on slope and channel material. Kasprak et. al (2016) set out to implement the Rosgen classification system, in addition to others, to see how the different schemes compared and where they diverged. They used DEM data and field measurements  from the Middle Fork John Day Basin, which is a watershed of high conservation interest in the Columbia River Basin. Our study set out to test the reproducibility of both of these studies with GIS tools to see if river classification schemes could be successfully implemented without having to rely on site-specific field data, which would make river classification a much easier and accessible task.</p>  
 
 
-## Materials and Procedure
-This analysis was replicated using entirely open source software. We used a combination of GRASS, QGIS 3.16 LTR, and RStudio. It is unclear what software was used in the Kasprak et al study, but it is assumed to be proprietary software. Our analysis also used a  1m LiDAR-derived DEM in place of field measurements to calculate our terrain-based metrics.
+  <h2 style="text-align:left"> Sampling Plan and Data Description </h2>
+<p style="text-align:left">For the replication of the Kasprak study, each student in GEOG0323 Open Source GIS was randomly assigned a study location from the 33 study locations analyzed by Kasprak et al 2016. The 33 study sites were originally chosen by Kasprak et al. from a stratified sampling of CHaMP data surveys conducted in 2012 and 2013.</p>
 
-My location was the study site identified by loc_id = 9 in the Columbia Habitat and Monitoring Program (CHaMP) [dataset.](https://github.com/hrigdon98/RE-rosgen/tree/main/data/raw/public).
 
-Code and materials are available in this GitHub [repository](https://github.com/hrigdon98/RE-rosgen).
+  <h2 style="text-align:left"> Materials and Procedure </h2>
+<p>This analysis was replicated using entirely open source software. We used a combination of GRASS, QGIS 3.16 LTR, and RStudio. It is unclear what software was used in the Kasprak et al study, but it is assumed to be proprietary software. Our analysis also used a  1m LiDAR-derived DEM in place of field measurements to calculate our terrain-based metrics. </p>
 
-A detailed outline of GRASS procedures can be found [here](https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/protocols/1-Research_Protocol_GRASS.pdf). We used the models linked below to automate steps for loading and visualizing the data as well as averaging our digitized banks and valleys into centerlines.
+<p style="text-align:left">My location was the study site identified by loc_id = 9 in the Columbia Habitat and Monitoring Program (CHaMP) <a href = "https://github.com/hrigdon98/RE-rosgen/tree/main/data/raw/public">dataset. </a>
+
+ <p style="text-align:left> Code and materials are available in this GitHub <a href = "https://github.com/hrigdon98/RE-rosgen">repository. </a>
+
+ <p style="text-align:left> A detailed outline of GRASS procedures can be found <a href = "https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/protocols/1-Research_Protocol_GRASS.pdf">here.</a> We used the models linked below to automate steps for loading and visualizing the data as well as averaging our digitized banks and valleys into centerlines.
 
 Models:
 - [Visualization](https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/visualize.gxm)
