@@ -39,6 +39,7 @@ h1.jumbotron-heading {
 body{background: #FFFFFF; 
     text-align: left;
     font-family: 'Crimson Text', serif;
+    padding-left: 80px;
 }
 
 h1{
