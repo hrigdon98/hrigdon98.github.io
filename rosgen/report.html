@@ -131,78 +131,33 @@
         <td>SubD50 in CHaMP_Data_MFJD</td>
         
   </tr>
-  <tr>
-    
-    
-   
-    
-    
-    
-    
-  </tr>
-  <tr>
-    
-    
-    
-    
-    
-  
-    
-     
-  </tr>
 </table>
 
-| Variable | Value | Source |
-| :--- | :--- | :--- |
-| Bankfull Width | 9.8264 | CHaMP_Data_MFJD |
-| Bankfull Depth Average  | 0.4114 | Dpth_Avg in CHaMP_Data_MFJD |
-| Bankfull Depth Max | 0.8571 | Dpth_Max in CHaMP_Data_MFJD |
-| Valley Width  | 500 | Cross-section profile |
-| Valley Depth | 1.7142 | 2x Bankfull Depth Max |
-| Stream/River Length | 265 | GRASS measurement of bank centerline |
-| Valley Length | 280.157387 | GRASS measurement of valley centerline |
-| Median Channel Material Particle Diameter | 67 | SubD50 in CHaMP_Data_MFJD  |
+<p style="text-align:left"> <img src="assets/rosgen_key.png"  alt = "rosgen key"  class = "image"> </p>
 
-Table 2. Rosgen Level I Classification
+<h2 style="text-align:left"> Discussion </h2>
 
-| Criteria | Value |
-| :--- | :--- |
-| Entrenchment Ratio | 50.89 |
-| Width / Depth Ratio | 23.88526981 |
-| Sinuosity | 0.95 |
-| Level I Stream Type | C |
 
-Table 3. Rosgen Level II Classification
-
-| Criteria | Value |
-| :--- | :--- |
-| Slope | 0.002 |
-| Channel Material | Gravel |
-| Level II Stream Type | C4b |
-
-![](assets/rosgen_key.jpg)
-
-## Discussion
-
-The results of this one analysis suggest that there is potential to accurately conduct river classifications remotely using open source GIS methods, but room for improvement. My own analysis was in agreement with the Kasprak analysis that this particular point should be classified as C4b. Our results differed the most in the calculation of the sinuosity, which can probably be attributed to human error in digitizing the stream and valley centerlines. I would expect that field measurements would be more robust. However, my calculations were only off by 0.2, which is still within the scope of flexibility of the Rosgen classification. I would need to see the results of my classmates before I could confidently point to my results as proof that this is a reproducible and generalizable workflow for the classification of other watershed and river systems. There are also a couple gaps in consistency and accuracy that make me hesitant to accept my results as a successful replication of the Kasprak study.
+<p style="text-align:left">The results of this one analysis suggest that there is potential to accurately conduct river classifications remotely using open source GIS methods, but room for improvement. My own analysis was in agreement with the Kasprak analysis that this particular point should be classified as C4b. Our results differed the most in the calculation of the sinuosity, which can probably be attributed to human error in digitizing the stream and valley centerlines. I would expect that field measurements would be more robust. However, my calculations were only off by 0.2, which is still within the scope of flexibility of the Rosgen classification. I would need to see the results of my classmates before I could confidently point to my results as proof that this is a reproducible and generalizable workflow for the classification of other watershed and river systems. There are also a couple gaps in consistency and accuracy that make me hesitant to accept my results as a successful replication of the Kasprak study.
 
 First of all, there are some temporal inconsistencies in the data that we used that give me pause. The CHaMP data surveyed this study location four different times from 2012-2017. The point I randomly selected was from 2017 had a Rosgen classification of C4b, but each of the 4 points had a different Rosgen classification each time it was surveyed. This either points to some inconsistency in the methods of the Kasprak study or shows just how dynamic river systems are, or a combination of both. Therefore, the temporal difference between when the elevation data was collected in 2008 and when the CHaMPS surveys were conducted seems like a significant source of inconsistency in this analysis.
 
-There was also a certain amount of subjectivity in the heads-up digitizing of the stream banks and valley lines. The analysis attempted to control for bias by alternating between digitizing banks and valleys, as well as alternating between slope and hillshade layers underneath, but I'm not sure how much bias that actually removed. I think that someone with more experience identifying stream banks and river valleys could digitize a little more accurately. However, it does not seem like that generated enough of an error to discredit the results of this analysis.
+There was also a certain amount of subjectivity in the heads-up digitizing of the stream banks and valley lines. The analysis attempted to control for bias by alternating between digitizing banks and valleys, as well as alternating between slope and hillshade layers underneath, but I'm not sure how much bias that actually removed. I think that someone with more experience identifying stream banks and river valleys could digitize a little more accurately. However, it does not seem like that generated enough of an error to discredit the results of this analysis.</p>
 
 
-## Conclusion
-Overall, this analysis was successful in replicating the results of [Kasprak et al (2016)](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0150293). The results of this analysis suggest that GIS can potentially be used as a tool for river classifications. This is an exciting possibility, as resources and accessibility of field measurements are often a barrier to conducting river classifications, and the results of this workflow suggest that this method could be implemented to perform river classifications in place of field measurements. However, this was an analysis conducted on one study site, out of 33, so these results should not be generalized for the whole dataset. There is still significant temporal discrepancy between the collection of the LiDAR data and the CHaMP survey that should be addressed before the scope of this analysis is expanded further.
+<h2 style="text-align:left"> Conclusion </h2>
+<p style="text-align:left">Overall, this analysis was successful in replicating the results of [Kasprak et al (2016)](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0150293). The results of this analysis suggest that GIS can potentially be used as a tool for river classifications. This is an exciting possibility, as resources and accessibility of field measurements are often a barrier to conducting river classifications, and the results of this workflow suggest that this method could be implemented to perform river classifications in place of field measurements. However, this was an analysis conducted on one study site, out of 33, so these results should not be generalized for the whole dataset. There is still significant temporal discrepancy between the collection of the LiDAR data and the CHaMP survey that should be addressed before the scope of this analysis is expanded further.</p>
 
-## References
+<h2 style="text-align:left"> References </h2>
 
-1. Rosgen, D. L. 1994. A classification of natural rivers. CATENA 22 (3):169–199. https://linkinghub.elsevier.com/retrieve/pii/0341816294900019.
-1. Kasprak, A., N. Hough-Snee, T. Beechie, N. Bouwes, G. Brierley, R. Camp, K. Fryirs, H. Imaki, M. Jensen, G. O’Brien, D. Rosgen, and J. Wheaton. 2016. The blurred line between form and process: A comparison of stream channel classification frameworks ed. J. A. Jones. PLOS ONE 11 (3):e0150293. https://dx.plos.org/10.1371/journal.pone.0150293.
+<p style="text-align:left">1. Rosgen, D. L. 1994. A classification of natural rivers. CATENA 22 (3):169–199. https://linkinghub.elsevier.com/retrieve/pii/0341816294900019.</p>
+<p style="text-align:left">2. Kasprak, A., N. Hough-Snee, T. Beechie, N. Bouwes, G. Brierley, R. Camp, K. Fryirs, H. Imaki, M. Jensen, G. O’Brien, D. Rosgen, and J. Wheaton. 2016. The blurred line between form and process: A comparison of stream channel classification frameworks ed. J. A. Jones. PLOS ONE 11 (3):e0150293. https://dx.plos.org/10.1371/journal.pone.0150293.</p>
 
-####  Report Template References & License
 
-This template was developed by Peter Kedron and Joseph Holler with funding support from HEGS-2049837. This template is an adaptation of the ReScience Article Template Developed by N.P Rougier, released under a GPL version 3 license and available here: https://github.com/ReScience/template. Copyright © Nicolas Rougier and coauthors. It also draws inspiration from the pre-registration protocol of the Open Science Framework and the replication studies of Camerer et al. (2016, 2018). See https://osf.io/pfdyw/ and https://osf.io/bzm54/
+<h2 style="text-align:left"> Report Template References & License </h2>
 
-Camerer, C. F., A. Dreber, E. Forsell, T.-H. Ho, J. Huber, M. Johannesson, M. Kirchler, J. Almenberg, A. Altmejd, T. Chan, E. Heikensten, F. Holzmeister, T. Imai, S. Isaksson, G. Nave, T. Pfeiffer, M. Razen, and H. Wu. 2016. Evaluating replicability of laboratory experiments in economics. Science 351 (6280):1433–1436. https://www.sciencemag.org/lookup/doi/10.1126/science.aaf0918.
+<p style="text-align:left">This template was developed by Peter Kedron and Joseph Holler with funding support from HEGS-2049837. This template is an adaptation of the ReScience Article Template Developed by N.P Rougier, released under a GPL version 3 license and available here: https://github.com/ReScience/template. Copyright © Nicolas Rougier and coauthors. It also draws inspiration from the pre-registration protocol of the Open Science Framework and the replication studies of Camerer et al. (2016, 2018). See https://osf.io/pfdyw/ and https://osf.io/bzm54/</p>
 
-Camerer, C. F., A. Dreber, F. Holzmeister, T.-H. Ho, J. Huber, M. Johannesson, M. Kirchler, G. Nave, B. A. Nosek, T. Pfeiffer, A. Altmejd, N. Buttrick, T. Chan, Y. Chen, E. Forsell, A. Gampa, E. Heikensten, L. Hummer, T. Imai, S. Isaksson, D. Manfredi, J. Rose, E.-J. Wagenmakers, and H. Wu. 2018. Evaluating the replicability of social science experiments in Nature and Science between 2010 and 2015. Nature Human Behaviour 2 (9):637–644. http://www.nature.com/articles/s41562-018-0399-z.
+<p style="text-align:left">Camerer, C. F., A. Dreber, E. Forsell, T.-H. Ho, J. Huber, M. Johannesson, M. Kirchler, J. Almenberg, A. Altmejd, T. Chan, E. Heikensten, F. Holzmeister, T. Imai, S. Isaksson, G. Nave, T. Pfeiffer, M. Razen, and H. Wu. 2016. Evaluating replicability of laboratory experiments in economics. Science 351 (6280):1433–1436. https://www.sciencemag.org/lookup/doi/10.1126/science.aaf0918.</p>
+
+<p style="text-align:left">Camerer, C. F., A. Dreber, F. Holzmeister, T.-H. Ho, J. Huber, M. Johannesson, M. Kirchler, G. Nave, B. A. Nosek, T. Pfeiffer, A. Altmejd, N. Buttrick, T. Chan, Y. Chen, E. Forsell, A. Gampa, E. Heikensten, L. Hummer, T. Imai, S. Isaksson, D. Manfredi, J. Rose, E.-J. Wagenmakers, and H. Wu. 2018. Evaluating the replicability of social science experiments in Nature and Science between 2010 and 2015. Nature Human Behaviour 2 (9):637–644. http://www.nature.com/articles/s41562-018-0399-z.</p>
