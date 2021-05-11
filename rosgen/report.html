@@ -24,6 +24,8 @@
       
        <h2 style="text-align:center;margin-top:25px;margin-bottom:25px;color:grey;"><pre><a href="../index.html">home</a>  |  <a href=" ./index.html">GIS</a>  |  <a href="../musings/index.html">musings</a>  |  <a href="../cartography/index.html">cartography</a>  
        |  <a href="../about.html">about</a></pre></h2>
+    </section>
+    
       <hr>
  
   
@@ -64,11 +66,11 @@
 <p style="text-align:left">We then moved into RStudio and further analyzed our data to graph longitudinal profiles and cross-section analyses, following this <a href = "https://github.com/hrigdon98/RE-rosgen/blob/main/procedure/code/2-ProfileViewer.Rmd">R markdown document.</a> While our procedures were pretty similar to those of the Kasprak et al study, there are a few key differences. This analysis, as stated, relied entirely on open source software, so our calculations of values in Table 2 have a little more subjectivity than those that could be produced by a proprietary GIS tool. The other important difference is the resolution of our DEM data. The Kasprak study used elevation data with a resolution of 0.1 meters, whereas our DEM was 1m. Although you can see some artifacts in the shaded relief, 1m is still an incredibly fine resolution and shouldn't affect the outcome of our results.</p>
 
  <h2 style="text-align:left">Replication Results</h2>
-           <p style="text-align:left"> <img src="assets/shadedRelief.png"  alt = "slope" width="300" height="300"> </p>
-           <p style="text-align:left"> <img src="assets/streamLines.png"  alt = "streamlines" width="300" height="300"> </p>
-           <p style="text-align:left"> <img src="assets/ValleyLines.png"  alt = "valley lines" width="300" height="300"> </p>
-           <p style="text-align:left"> <img src="assets/longitudinalProfile.png"  alt = "longitudinal profile" width="300" height="300"> </p>
-           <p style="text-align:left"> <img src="assets/crossSection.png"  alt = "slope" width="300" height="300"> </p>                                                                                                               
+           <p style="text-align:left"> <img src="assets/shadedRelief.png"  alt = "slope"  class = "image"> </p>
+           <p style="text-align:left"> <img src="assets/streamLines.png"  alt = "streamlines" class = "image"> </p>
+           <p style="text-align:left"> <img src="assets/ValleyLines.png"  alt = "valley lines" class = "image"> </p>
+           <p style="text-align:left"> <img src="assets/longitudinalProfile.png"  alt = "longitudinal profile" class = "image"> </p>
+           <p style="text-align:left"> <img src="assets/crossSection.png"  alt = "slope" class = "image"> </p>                                                                                                               
 
 
 
@@ -83,33 +85,70 @@
   </tr>
   <tr>
     <td>Bankfull Width</td>
-    <td>Bankful Depth Average</td>
-    <td>Bankful Depth Max</td>
-    <td>Valley Width</td>
-    <td>Valley Depth</td>
-    <td>Stream/River Length</td>
-    <td>Valley Length</td>
-    <td>Median Channel Material Particle Diameter</td>
-  </tr>
-  <tr>
     <td>9.8264/td>
-    <td>0.4114n</td>
-    <td>0.8571</td>
-    <td>500</td>
-    <td>1.7142</td>
-    <td>265</td>
-    <td>280.157387</td>
-    <td>67</td>
+    <td>CHaMP_Data_MFJD</td>
   </tr>
   <tr>
-    <td>CHaMP_Data_MFJD</td>
+    
+    <td>Bankful Depth Average</td>
+    <td>0.4114n</td>
     <td>Dpth_Avg in CHaMP_Data_MFJD</td>
-    <td>Dpth_Max in CHaMP_Data_MFJD</td>
-    <td>Cross-section profile</td>
-    <td>2x Bankfull depth max</td>
-    <td>GRASS measurement of bank centerline</td>
+  </tr>
+  <tr>
+        
+        
+    <td>Bankful Depth Max</td>
+         <td>0.8571</td>
+        <td>Dpth_Max in CHaMP_Data_MFJD</td>
+        </tr>
+   <tr>
+    <td>Valley Width</td>
+        <td>500</td>
+        <td>Cross-section profile</td>
+   </tr>
+   <tr>
+    <td>Valley Depth</td>
+        <td>1.7142</td>
+        <td>2x Bankfull depth max</td>
+  </tr>
+  <tr>
+    <td>Stream/River Length</td>
+        <td>265</td>
+          <td>GRASS measurement of bank centerline</td>
+        </tr>
+        <tr>
+        
+        
+        
+    <td>Valley Length</td>
+    <td>280.157387</td>
     <td>GRASS measurement of valley centerline</td>
-     <td>SubD50 in CHaMP_Data_MFJD</td>
+        </tr>
+        <tr>
+        
+    <td>Median Channel Material Particle Diameter</td>
+        <td>67</td>
+        <td>SubD50 in CHaMP_Data_MFJD</td>
+        
+  </tr>
+  <tr>
+    
+    
+   
+    
+    
+    
+    
+  </tr>
+  <tr>
+    
+    
+    
+    
+    
+  
+    
+     
   </tr>
 </table>
 
