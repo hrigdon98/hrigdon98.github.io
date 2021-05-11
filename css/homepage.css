@@ -1,6 +1,6 @@
 .jumbotron {
   width: 100%;
-  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-family: 'Lato', sans-serif;
   max-width: 800px;
   background-color: #ffffff;
   margin: auto;
@@ -13,7 +13,7 @@
 h1.jumbotron-heading {
   margin-top: 25px;
     margin-bottom: 25px;
-    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-family:'Lato', sans-serif;
 }
 
 .jumbotron-heading a {
@@ -38,7 +38,7 @@ h1.jumbotron-heading {
 
 body{background: #FFFFFF; 
     text-align: center;
-    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-family: 'Crimson Text', serif;
 }
 
 h1{
@@ -57,7 +57,7 @@ h1{
 
 }
 
-.img {
+.image {
   display: block;
   width: 100%!important;
   margin-bottom: 10px!important;
