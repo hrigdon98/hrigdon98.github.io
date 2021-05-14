@@ -51,6 +51,9 @@ h1{
     
     font-weight: bold;
 }
+p {
+  margin: 35px;
+}
 
 .blurb{
     color: black;
