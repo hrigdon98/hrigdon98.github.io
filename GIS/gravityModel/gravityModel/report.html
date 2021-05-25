@@ -40,26 +40,26 @@
 
     <h2 style="text-align:left">Data</h2>
     <div>
-    <p style="text-align:center"> <img src="./hospitalProcessing" class = "image"> </p>
-    <p style="text-align:center"> <b>Figure 1</b>shows the workflow of the gravity model which can be downloaded as a model.3 file <a href = "./GravityModel (3).model3">here</a> </p>
+    <p style="text-align:center"> <img src="./hospitalProcessing.png" class = "image"> </p>
+    <p style="text-align:center"> <b>Figure 1 </b>shows the workflow of the gravity model which can be downloaded as a model.3 file <a href = "./GravityModel (3).model3">here</a> </p>
     </div>
     <p style="text-align:left">This analysis used hospital data from <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/6ac5e325468c4cb9b905f1728d6fbf0f_0/explore">Homeland Security</a>. The hospital data was pre-processed according to the workflow shown in Figure (whatever) in order to filter out psychiatric and military hospitals, hospitals that didn’t have a recorded number of beds, and hospitals that were closed. The hospitals were also grouped by zip code so that there was one hospital point per town. This was so that the units to better match the spatial units of the inputs, which were town centroids. </p>
 
     <h2 style="text-align:left">Gravity Model Workflow</h2>
     <div>
-    <p style="text-align:center"> <img src="./modelWorkflow" class = "image"> </p>
+    <p style="text-align:center"> <img src="./modelWorkflow.png" class = "image"> </p>
     <p style="text-align:left"> <b>Figure 2</b>shows the workflow of the gravity model which can be downloaded as a model.3 file <a href = "./GravityModel (3).model3">here</a> </p>
     </div>
 
     <h2 style="text-align:left">Results</h2>
     <div>
-    <p style="text-align:center"> <img src="./results" class = "image"> </p>
-    <p style="text-align:left"> <b>Figure 2=3</b>shows <a href= "./qgis2web_2021_05_25-13_58_40_252155/index.html">this</a> interactive map with the results of the comparison.</p>
+    <p style="text-align:center"> <img src="./results.png" class = "image"> </p>
+    <p style="text-align:left"> <b>Figure 2 </b>shows <a href= "./qgis2web_2021_05_25-13_58_40_252155/index.html">this</a> interactive map with the results of the comparison.</p>
     <p style="text-align:left"> The two models do not align perfectly, although this is not surprising. However, it is interesting to see the places in which they are in agreement and where they are in disagreement. This is probably because real spatial interaction is much more complicated and nuanced than our model accounts for. The Dartmouth Atlas catchment areas were made using hospital billing data, which is a much more accurate basis for modelling. However, it is exciting to see that our simple gravity model was not too far off in many areas. Our model could be further improved by using a OD distance matrix, which calculates distance based on road networks instead of Euclidean distance. This would account for a little more of the complexity of access to healthcare services, although it is important to acknowledge that there are many other social and economic factors that prevent people from accessing healthcare services besides physical access.</p>
 
     <h2 style="text-align:left">References</h2>
     <p style="text-align:left">Rodrigue, J-P (2020), The Geography of Transport Systems, Fifth Edition, New York: Routledge. https://transportgeography.org/contents/methods/spatial-interactions-gravity-model/
     </p>
 
-    <h2 style="text-align:left">ACKNOWLEDGEMENTS:</h2>
+    <h2 style="text-align:left">Acknowledge:</h2>
     <p style="text-align:left">Many thanks to Emma Brown and Brooke Laird for walking me through this lab after I added this class. I could not have done it without your support and expertise. Also a shout out to Nick Nonnenmacher for the company and Leaflet wisdom as I finished this lab.</p>
