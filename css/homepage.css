@@ -10,6 +10,11 @@
   margin-top: 25px;
 }
 
+.img{
+  vertical-align: middle;
+  border-style: none;
+}
+
 h1.jumbotron-heading {
   margin-top: 25px;
     margin-bottom: 25px;
