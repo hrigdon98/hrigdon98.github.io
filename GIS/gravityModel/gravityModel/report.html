@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang = "en">
+  <head>
+    <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+     <title>Hannah Rigdon</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text&family=Lato&display=swap" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="/css/homepage.css" rel="stylesheet">
+  </head>
+
+<body>
+  <section class="jumbotron text-center">
+    <h1 class="jumbotron-heading" > <a href="../index.html"> Hannah Rigdon </a> </h1>
+
+     <h2 style="text-align:center;margin-top:25px;margin-bottom:25px;color:grey;"><pre><a href="../index.html">home</a>  |  <a href=" ./index.html">GIS</a>  |  <a href="../musings/index.html">musings</a>  |  <a href="../cartography/index.html">cartography</a>
+     |  <a href="../about.html">about</a></pre></h2>
+  </section>
+
+    <hr>
+
+    <h1 style="text-align:left">Gravity Model of Spatial Interaction in QGIS </h1>
+
+    <h2 style="text-align:left">Gravity Model Lab </h2>
+
+
+    <p style="text-align:left">This lab exercise seeks to compare the hospital catchments of a gravity model of spatial interaction with the catchments created by the Dartmouth Healthcare Atlas. Gravity models of spatial interaction predict the amount of interaction between two places. Identifying catchment areas can help us understand how resources are being accessed and by whom in order to make more equitable and just resource allocation decisions in the future. This example is exploring hospital catchment areas in New England specifically to try to identify over and underserved areas.</p>
+
+    <p style="text-align:left">The model is adapted from Jean-Paul Rodrigues’ <i>The Geography of Transportation Systems </i> and considers three variables:  the weight/attractiveness of the input (origin) feature, the weight/attractiveness of the destination (target) feature, and the distance between the origin and the target. This model creates a distance matrix from the input and the target layers and then applies the formula (inputWeight)^λ * (targetWeight)^α / (distance)^β to calculate the potential for interaction. To model hospital catchment areas in this example, the input features were town centroids, weighted by population, and the target features were hospitals, weighted by beds.  </p>
+
+    <h2 style="text-align:left">Purpose</h2>
+    <p> The purpose of this lab is to compare different methods of modelling the provision and distribution of healthcare services. Especially now, during the COVID-19 pandemic, it is critical to have an accurate understanding of who is accessing healthcare services and identify underserved areas or places that are overwhelmed by demand for services. </p>
+
+    <h2 style="text-align:left">Data</h2>
+    <div>
+    <p style="text-align:center"> <img src="./hospitalProcessing" class = "image"> </p>
+    <p style="text-align:center"> <b>Figure 1</b>shows the workflow of the gravity model which can be downloaded as a model.3 file <a href = "./GravityModel (3).model3">here</a> </p>
+    </div>
+    <p style="text-align:left">This analysis used hospital data from <a href="https://hifld-geoplatform.opendata.arcgis.com/datasets/6ac5e325468c4cb9b905f1728d6fbf0f_0/explore">Homeland Security</a>. The hospital data was pre-processed according to the workflow shown in Figure (whatever) in order to filter out psychiatric and military hospitals, hospitals that didn’t have a recorded number of beds, and hospitals that were closed. The hospitals were also grouped by zip code so that there was one hospital point per town. This was so that the units to better match the spatial units of the inputs, which were town centroids. </p>
+
+    <h2 style="text-align:left">Gravity Model Workflow</h2>
+    <div>
+    <p style="text-align:center"> <img src="./modelWorkflow" class = "image"> </p>
+    <p style="text-align:left"> <b>Figure 2</b>shows the workflow of the gravity model which can be downloaded as a model.3 file <a href = "./GravityModel (3).model3">here</a> </p>
+    </div>
+
+    <h2 style="text-align:left">Results</h2>
+    <div>
+    <p style="text-align:center"> <img src="./results" class = "image"> </p>
+    <p style="text-align:left"> <b>Figure 2=3</b>shows <a href= "./qgis2web_2021_05_25-13_58_40_252155/index.html">this</a> interactive map with the results of the comparison.</p>
+    <p style="text-align:left"> The two models do not align perfectly, although this is not surprising. However, it is interesting to see the places in which they are in agreement and where they are in disagreement. This is probably because real spatial interaction is much more complicated and nuanced than our model accounts for. The Dartmouth Atlas catchment areas were made using hospital billing data, which is a much more accurate basis for modelling. However, it is exciting to see that our simple gravity model was not too far off in many areas. Our model could be further improved by using a OD distance matrix, which calculates distance based on road networks instead of Euclidean distance. This would account for a little more of the complexity of access to healthcare services, although it is important to acknowledge that there are many other social and economic factors that prevent people from accessing healthcare services besides physical access.</p>
+
+    <h2 style="text-align:left">References</h2>
+    <p style="text-align:left">Rodrigue, J-P (2020), The Geography of Transport Systems, Fifth Edition, New York: Routledge. https://transportgeography.org/contents/methods/spatial-interactions-gravity-model/
+    </p>
+
+    <h2 style="text-align:left">ACKNOWLEDGEMENTS:</h2>
+    <p style="text-align:left">Many thanks to Emma Brown and Brooke Laird for walking me through this lab after I added this class. I could not have done it without your support and expertise. Also a shout out to Nick Nonnenmacher for the company and Leaflet wisdom as I finished this lab.</p>
