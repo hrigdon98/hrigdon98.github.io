@@ -35,18 +35,18 @@
 
     <p style="text-align:left">Replication Author: Hannah Rigdon</p>
 
-<p style="text-align:left">Replication Materials Available at: [github repository name](github repository link)</p>
+<p style="text-align:left">Replication Materials Available at: <a href= "https://github.com/hrigdon98/RE-Dorian">RE-Dorian</a></p>
 
     <p style="text-align:left">Created: 10 May 2021 Revised: 10 May 2021</p>
 
     <h2 style="text-align:left">Abstract</h2>
 <p style="text-align:left">Wang et al (2016) analyzed Twitter data for wildfires in California, finding that there is a relationship between wildfire-related Twitter activity and wildfires. Wang also found that there was a spatial relationship between the two- Twitter activity reflected the geography of the wildfires. This finding means that social media can be used to help understand the spatial patterns of disasters and help inform natural disaster response and management. However, there are still significant limitations. The twitter scraping did not cover the entire extent of the wildfires and it is questionable whether or not the sampled data is a valid representation of Twitter activity overall.
 
-Holler (2021) is studying Twitter data for Hurricane Dorian on the Atlantic coast, finding that in spite of tending news and social media content regarding a false narrative of risk, original Tweets still clustered significantly along the real hurricane track, and only along the hurricane track.
+Holler (2021) is studying Twitter data for Hurricane Dorian on the Atlantic coast, finding that in spite of trending news and social media content regarding a false narrative of risk, original Tweets still clustered significantly along the real hurricane track, and only along the hurricane track.
 
 Reproducing and replicating spatial research of Wang et all and Holler continues to be relevant because social media increasingly being used as a data source for patterns of human behavior. Social media is by no means representative of entire populations, therefore it is important to understand how researchers can responsibly use social media content to generate knowledge about behavior.
 
-In my replication study, I will be using twitter data regarding COVID-19 vaccinations and compare twitter activity to vaccination rates by county across the US.</p>
+In my replication study, I will be using twitter data regarding COVID-19 vaccinations and compare twitter activity to vaccination rates by county across the US. I'm curious to see if Twitter activity about COVID-19 vaccinations looks similar to vaccination rates and if twitter activity could be indicative of vaccination behavior.</p>
 
     <h2 style="text-align:left">Original Study Information</h2>
 
@@ -60,30 +60,30 @@ Holler modified Wang et al's methods by not searching for retweets for network a
 Wang et al (2016) conducted their study using the tm and igraph packages in R 3.1.2. The replication study by Holler (2021) used R, including the rtweet, rehydratoR, igraph, sf, and spdep packages for analysis.</p>
 
     <h2 style="text-align:left">Materials and Procedure</h2>
-<p style="text-align:left">For this analysis, I used tweets from within 8 days of May 10th that mentioned the words "moderna" or "pfizer" or "vaccine" that were from within a thousand mile radius of central Pennsylvania. I then joined my data with data collected by Emma Brown with the same search terms from the West Coast in order to get a full picture of twitter activity across the United States. I also used "normal" twitter activity from within the same time range and radius in order to normalize the twitter activity. I also used population data from the US Census to normalize the tweet rate.
+<p style="text-align:left">For this analysis, I used tweets from within 8 days of May 10th that mentioned the words "moderna" or "pfizer" or "vaccine" that were from within a thousand mile radius of central Pennsylvania (37, -94). I then joined my data with data collected by Emma Brown with the same search terms from within 1000 miles of coordinates 40, -108 in order to get a full picture of twitter activity across the United States. The rest of the analysis was conducted with this combined dataset. I also used "normal" twitter activity from within the same time range and radius in order to normalize the twitter activity. I also used population data from the US Census to normalize the tweet rate.
 
 Our original dataset contained around 130,000 tweets, but only 9461 of them actually contained geographic information and were considered in our analysis.
 
-For the analysis, I followed the procedure as Holler (2021). The spatial analysis was conducted in R and the script can be found here.
+For the analysis, I followed the procedure as Holler (2021). The spatial analysis was conducted in R and the script can be found <a href= "https://github.com/hrigdon98/RE-Dorian/blob/main/procedure/code/twitterAnalysis.R">here</a>.
 
-I also used COVID-19 vaccination data collected by Benjy Renton to map COVID-19 vaccination rates by county. The vaccination records are based off of state reports and normalized by population. I also removed any state that was reporting less than 75% of their vaccine records with county-specific information so that the vaccination rates would not be artificially depressed by the missing geographic information. Benjy's data can be found on his github page.(ATTACH LINK).</p>
+I also used COVID-19 vaccination data collected by Benjy Renton to map COVID-19 vaccination rates by county. The vaccination records are based off of state reports and normalized by population. I also removed any state that was reporting less than 75% of their vaccine records with county-specific information so that the vaccination rates would not be artificially depressed by the missing geographic information. Benjy's data can be found on <a href= "https://github.com/bhrenton/cdc-vaccination-data">his github page</a>.</p>
 
     <h2 style="text-align:left">Replication Results</h2>
     
     <p style="text-align:left"> <img src="./temporalPlot.png"  alt = "temporal plot"  class = "image"> </p>
-    <p style="text-align:left"><b>Figure 1</b> shows the temporal analysis of the collected tweets</p>
+    <p style="text-align:center"><b>Figure 1</b> shows the temporal analysis of the collected tweets from the combined dataset</p>
     
     <p style="text-align:left"> <img src="./uniqueWords.png"  alt = "unique words plot"  class = "image"> </p>
-    <p style="text-align:left"><b>Figure 1.2</b> shows the most frequently used words along with vaccine, pfizer, or moderna</p>
+    <p style="text-align:center"><b>Figure 1.2</b> shows the most frequently used words along with vaccine, pfizer, or moderna</p>
     
      <p style="text-align:left"> <img src="./wordPairs.png"  alt = "word pairs"  class = "image"> </p>
      <p style="text-align:left"> <img src="./tweetMap.png"  alt = "tweet map"  class = "image"> </p>
-    <p style="text-align:left"><b>Figure 1.3</b> shows a map of the twitter activity used in this analysis</p>
+    <p style="text-align:center"><b>Figure 1.3</b> shows a map of the twitter activity used in this analysis</p>
      <p style="text-align:left"> <img src="./clusterAnalysisForRealz.png"  alt = "cluster"  class = "image"> </p>
-    <p style="text-align:left"><b>Figure 1.4</b> shows a map of the clusters of twitter activity about COVID-19 vaccines</p>
+    <p style="text-align:center"><b>Figure 1.4</b> shows a map of the clusters of twitter activity about COVID-19 vaccines</p>
      <p style="text-align:left"> <img src="./Screen Shot 2021-05-10 at 10.45.47 PM.png
 "  alt = "cluster"  class = "image"> </p>
-    <p style="text-align:left"><b>Figure 2</b> shows a map of COVID-19 vaccination rates in the US</p>
+    <p style="text-align:center"><b>Figure 2</b> shows a map of COVID-19 vaccination rates in the US</p>
     
    
     <h2 style="text-align:left">Unplanned Deviations from the Protocol</h2>
@@ -92,7 +92,10 @@ I also used COVID-19 vaccination data collected by Benjy Renton to map COVID-19 
 The Twitter data that we joined together was also from two nonidentical time periods, which could contribute some uncertainty to the results of our analysis. Overall, the twitter data is representative of April 27th through May 10th, but Emma's tweets are sourced from the beginning portion of that time window while mine are from the second half. However, that shouldn't affect the outcome of our analysis too much, as vaccination rates shouldn't be drastically different on a day-to-day basis.</p>
 
     <h2 style="text-align:left">Discussion</h2>
-<p style="text-align:left">When comparing the hot-spot map (Figure 1.4) to the map of vaccination rates (Figure 2), you can see that the hotspots of Twitter activity about COVID-19 vaccinations can be somewhat correlated with higher vaccination rates. Especially along the West Coast, there is a strong similarity in the patterns of higher clustering activity and higher vaccination rates. Additionally, we can see significantly low activity in midwest in states like Kansas where there also appears to be low vaccination rates. These results could indicate that there is a correlation between social media activity about vaccines and higher vaccination rates, suggesting that posting information about vaccines or public conversations about vaccinations could contribute to higher vaccination rates. There is a lot of uncertainty about how representative social media is of broader cultural conversations and human behavior, but the results of this analysis, similar to Wang et all, suggest that there could be some insight into human behavior in social media patterns when it comes to disaster response and information sharing.</p>
+<p style="text-align:left">When comparing the hot-spot map (Figure 1.4) to the map of vaccination rates (Figure 2), you can see that the hotspots of Twitter activity about COVID-19 vaccinations can be somewhat correlated with higher vaccination rates. Especially along the West Coast, there is a strong similarity in the patterns of higher clustering activity and higher vaccination rates. Additionally, we can see significantly low activity in midwest in 
+  states like Kansas where there also appears to be low vaccination rates. Its unclear how much the merge of the dataset affected the results of the analysis, especially since the overlapping areas in the dataset was in the midwest, where we can see a low point of twitter activity. I'm inclined to think that
+  that low point is still real in that, with the anti-join, there are no duplicated tweets. If anything, there are more tweets from the longer temporal window of the combined dataset, which should have overrepresented twitter activity.
+  These results could indicate that there is a correlation between social media activity about vaccines and higher vaccination rates, suggesting that posting information about vaccines or public conversations about vaccinations could contribute to higher vaccination rates. There is a lot of uncertainty about how representative social media is of broader cultural conversations and human behavior, but the results of this analysis, similar to Wang et all, suggest that there could be some insight into human behavior in social media patterns when it comes to disaster response and information sharing.</p>
 
     <h2 style="text-align:left">Conclusion</h2>
     < p style="text-align:left">In conclusion, the results of this analysis are in agreement with those of Wang et al and Holler in that they suggest that there is some relationship between social media activity and broader patterns of human behavior. Our analysis found that there were geographic similarities between locations of twitter activity about the COVID-19 vaccine and places with higher COVID-19 vaccination rates. I think there needs to be much more research and a more rigorous analysis before we can make stronger assertions about patterns like the ones observed in this analysis. However, as social media has become so integrated into our daily lives, communities, and national conversations, it is important to have robust methods for making meaning out of the way people use twitter and other information sharing platforms. Our replication and reproduction of both Holler and Wang et al show that there can be generalized methods of analysis, which is important as scholars continue to figure out the ways in which social media both generates and reflects human behavior.
