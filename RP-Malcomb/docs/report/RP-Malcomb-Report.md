@@ -12,7 +12,7 @@ Original study *by* Malcomb, D. W., E. A. Weaver, and A. R. Krakowka. 2014. Vuln
 Replication Authors:
 Emma Brown, Brooke Laird, Sam Marshall, Hannah Rigdon, Vincent Falardeau, Joseph Holler, Kufre Udoh, Open Source GIScience students of Fall 2019 and Spring 2021
 
-Replication Materials Available [here](https://github.com/emmab725/RP-Malcomb).
+Replication Materials Available [here](https://github.com/hrigdon98/RP-Malcomb).
 
 Created: `14 April 2021`
 Revised: `27 April 2021`
