@@ -28,7 +28,7 @@
 
     <h1 style="text-align:left">Replication of Vulnerability modeling for sub-Saharan Africa</h1>
 
-<p style="text-align:left">Original study *by* Malcomb, D. W., E. A. Weaver, and A. R. Krakowka. 2014. Vulnerability modeling for sub-Saharan Africa: An operationalized approach in Malawi. <i>Applied Geography</i>48:17–30. <a href= "https://doi.org/10.1016/j.apgeog.2014.01.004">DOI:[10.1016/j.apgeog.2014.01.004</a></p>
+<p style="text-align:left">Original study by Malcomb, D. W., E. A. Weaver, and A. R. Krakowka. 2014. Vulnerability modeling for sub-Saharan Africa: An operationalized approach in Malawi. <i>Applied Geography</i>48:17–30. <a href= "https://doi.org/10.1016/j.apgeog.2014.01.004">DOI:[10.1016/j.apgeog.2014.01.004</a></p>
 
 <p style="text-align:left"> Replication Authors:</p>
 <p style="text-align:left">Emma Brown, Brooke Laird, Sam Marshall, Hannah Rigdon, Vincent Falardeau, Joseph Holler, Kufre Udoh, Open Source GIScience students of Fall 2019 and Spring 2021
@@ -57,7 +57,7 @@
 
 <p style="text-align:left">Demographic and Health Surveys data are used to quantify average household assets and access to resources.</p>
 
-<p style="text-align:left">The DHS dataset was collected by the US Agency for International Development (USAID) as part of their Demographics and Health Surveys program, which are designed to be nationally representative population-based surveys. This analysis used the table information from individual household survey responses as well as geographically randomized survey cluster points <a href= "https://github.com/emmab725/RP-Malcomb/blob/main/data/metadata/Guidelines%20on%20the%20use%20of%20DHS%20GPS%20data.pdf">Perez-Heydrich et al. 2013</a>. The datasets used in this analysis were collected in 2004 and 2010 and are based on over 38,500 survey responses (Malcomb et al. 2014). The household survey questionnaire is standardized across all countries and regions where the survey is performed and is designed to be applicable and comparable across countries. Individual countries may add questions or supplemental questionnaires to tailor the surveys to local needs, but the model surveys remain the same and are designed by USAID ("Data Collection").</p>
+<p style="text-align:left">The DHS dataset was collected by the US Agency for International Development (USAID) as part of their Demographics and Health Surveys program, which are designed to be nationally representative population-based surveys. This analysis used the table information from individual household survey responses as well as geographically randomized survey cluster points( <a href= "https://github.com/emmab725/RP-Malcomb/blob/main/data/metadata/Guidelines%20on%20the%20use%20of%20DHS%20GPS%20data.pdf">Perez-Heydrich et al. 2013)</a>. The datasets used in this analysis were collected in 2004 and 2010 and are based on over 38,500 survey responses (Malcomb et al. 2014). The household survey questionnaire is standardized across all countries and regions where the survey is performed and is designed to be applicable and comparable across countries. Individual countries may add questions or supplemental questionnaires to tailor the surveys to local needs, but the model surveys remain the same and are designed by USAID ("Data Collection").</p>
 
 <p style="text-align:left">The original study constructs 10 indicators from 14 survey variables in order to assess each household’s financial and social assets as well as access to markets, information, and resources (Malcomb et al. 2014). These indicators measure financial assets such as livestock, land ownership, money, and access to technology and information, as well as demographic information such as household gender and age composition, health status, and market access/location. A full list of indicators used is available <a href= "https://github.com/emmab725/RP-Malcomb/blob/main/data/metadata/dhs-indicators-used.xlsx"> here</a>.</p>
 
@@ -100,7 +100,7 @@ The replication study will use R version 4.0.</p>
 
 
 
-<h2 style="text-align:left">Original Workflow</h2>
+<h3 style="text-align:left">Original Workflow</h3>
 <pre>
   1. Data:
 
@@ -153,42 +153,42 @@ The replication study will use R version 4.0.</p>
 <p style="text-align:left">
 We failed to reproduce the original study’s assessment of climate vulnerability (Figure 5 in the paper). There was broad disagreement between our reproduction (fig. 4) and a digitized version of the original study’s map of climate vulnerability, as shown in a map of the difference between the original study and reproduction (fig. 5). A confusion matrix comparing the two maps yielded a Spearman’s rho value of 0.15, indicating a very low degree of correlation between the original study and our reproduction. However, a high Spearman's Rho can be achieved because the statistic is based on rank and not value. It is possible that we need an additional step in our analysis to mask out natural areas. As shown in a scatterplot of vulnerability scores from the original study vs. the reproduction (fig. 5), the reproduction consistently yielded lower vulnerability scores, falling below the line of equality. Prior to comparison, the vulnerability values were scaled from 0 to 1 over the range, from minimum to maximum. As we can see in fig. 6, vulnerability scores in the original study were clustered between 0.5 and 0.9, on the high end of the range, while vulnerability scores in the reproduction were mostly distributed lower in the range, from 0.1 to 0.7. Thus, the skewness of the two distributions of vulnerability scores might explain why the reproduction was almost always lower.</p>
 
-![Adaptive Capacity Difference – Original Study vs. Reproduction](assets/ac_difference.png)
 
-<p style="text-align:center"><b>Figure 1</b> Map of the difference between the adaptive capacity of the reproduction vs. the original study.</p>
+  <p style="text-align:center"> <img src="./assets/ac_difference.png" class = "image"> </p>
+
+<p style="text-align:center"><b>Figure 1:</b> Map of the difference between the adaptive capacity of the reproduction vs. the original study.</p>
 
 
 
 
 <p style="text-align:center"> <img src="./assets/ac_2010.png" class = "image"> </p>
-<p style="text-align:center"><b>Figure 2</b> Reproduction results for adaptive capacity by traditional authority (TA), as calculated in R.</p>
+<p style="text-align:center"><b>Figure 2:</b> Reproduction results for adaptive capacity by traditional authority (TA), as calculated in R.</p>
 
 
 
 
 
 <p style="text-align:center"> <img src="./assets/confusionmatrix.png" class = "image"> </p>
-<p style="text-align:center"><b>Figure 3</b> Confusion matrix comparing the Malcomb et al. (2014) results to the reproduction; note that the reproduction often yielded lower adaptive capacity scores than the original study, but the reproduction results for each TA were generally within one interval of the original study's results.</p>
+<p style="text-align:center"><b>Figure 3:</b> Confusion matrix comparing the Malcomb et al. (2014) results to the reproduction; note that the reproduction often yielded lower adaptive capacity scores than the original study, but the reproduction results for each TA were generally within one interval of the original study's results.</p>
 
 
 
 
 
 <p style="text-align:center"> <img src="./assets/vulnerability.png" class = "image"> </p>
-<p style="text-align:center"><b>Figure 4</b> Reproduction results for vulnerability in Malawi, as calculated in R.</p>
+<p style="text-align:center"><b>Figure 4:</b> Reproduction results for vulnerability in Malawi, as calculated in R.</p>
 
 
 
 
 
 <p style="text-align:center"> <img src="./assets/vuln_difference.png" class = "image"> </p>
-<p style="text-align:center"><b>Figure 5</b> Map of the difference between the vulnerability calculated in the reproduction vs. the original study.</p>
+<p style="text-align:center"><b>Figure 5: </b> Map of the difference between the vulnerability calculated in the reproduction vs. the original study.</p>
 
 
 
-![Scatterplot of Vulnerability Comparison](assets/scatterplot.png)
 <p style="text-align:center"> <img src="./assets/scatterplot.png" class = "image"> </p>
-<p style="text-align:center"><b>Figure 6</b>Scatterplot comparing vulnerability scores from the original study to the results of the reproduction.
+<p style="text-align:center"><b>Figure 6: </b>Scatterplot comparing vulnerability scores from the original study to the results of the reproduction.
 </p>
 
 
